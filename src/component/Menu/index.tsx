@@ -1,12 +1,12 @@
 import React from 'react';
 import { Menu } from 'antd'
-import { SettingOutlined } from '@ant-design/icons'
+import { HomeOutlined, SettingOutlined } from '@ant-design/icons'
 
 const LeftMenu = () => {
   return (
-    <Menu mode="inline" defaultSelectedKeys={['1']}>
+    <Menu className="ant-menu-layout" mode="inline" defaultSelectedKeys={['1']}>
         <Menu.Item key={1}>
-            Trang chủ
+        <HomeOutlined />Trang chủ
         </Menu.Item>
         <Menu.Item key={2}>
             Quản lý vé
