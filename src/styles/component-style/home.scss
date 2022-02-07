@@ -1,0 +1,12 @@
+@import "../variable";
+
+.main-layout {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    border-radius: 24px;
+    font-size: $fs-5;
+    font-weight: $font-weight-normal;
+    color: $color--main-text;
+    background: $color-background-layout;
+}
