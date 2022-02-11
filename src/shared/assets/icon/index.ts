@@ -1,0 +1,5 @@
+export {default as CalenderIcon } from './calender'
+export {default as MonitorIcon } from './monitor'
+export {default as PaperListIcon  } from './paperList'
+export {default as TicketIcon } from './ticket'
+export {default as FilterIcon } from './filter'
