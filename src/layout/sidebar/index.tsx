@@ -1,17 +1,44 @@
-import React, { PropsWithChildren } from 'react'
+import React, { memo, PropsWithChildren } from 'react'
+import { publicRouter } from '../../router';
+import { IRouter } from '../../router/interface';
 import { logo } from '../../shared/assets/images'
+import MenuItem from './MenuItem';
 
-const SideBarComponent: React.FC<PropsWithChildren<any>> = ( props) => {
+interface IRenderMenuProps {
+  listNav: Array<IRouter>;
+  location?: string;
+}
+
+const _RenderMenu: React.FC<IRenderMenuProps> = ({ listNav, location }: IRenderMenuProps) => {
+  return (
+    <>
+      {listNav.map((item: IRouter, index) => {
+        if (item.menu == null || item.menu?.hideInNavbar) {
+          return <React.Fragment key={index}> no menu</React.Fragment>;
+        } else {
+          console.log('render menu')
+          return <MenuItem data={item} key={index} />;
+        }
+      })}
+    </>
+  );
+};
+
+const RenderMenu = memo(_RenderMenu);
+
+const SideBarComponent = () => {
   return (
     <div className="sider-component">
       <div className="logo">
         <img src={logo} alt="logo" />
       </div>
       <div className="mask">
-        {props.children}
+        <div className="menu">
+          <RenderMenu listNav={publicRouter} />
+        </div>
       </div>
     </div>
   )
 }
 
-export default SideBarComponent
+export default memo(SideBarComponent)

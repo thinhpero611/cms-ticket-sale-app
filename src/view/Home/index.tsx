@@ -2,16 +2,16 @@ import React from 'react';
 import {  Content } from 'antd/lib/layout/layout';
 // component
 import Frame from '../../shared/component/Frame1';
-import DefaultLayout from '../../layout';
+import { Link } from 'react-router-dom';
 
 
 const Home = () => {
+  console.log("render home")
   return (
-    <DefaultLayout>
-      <Content>
-        <Frame />
-      </Content>
-    </DefaultLayout>
+    <Content>
+      <Link to="/setting">link to setting</Link>
+      <Frame />
+    </Content>
   )
 };
 

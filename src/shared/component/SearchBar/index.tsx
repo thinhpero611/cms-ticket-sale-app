@@ -17,17 +17,16 @@ const SearchComponent = (props: Iprops) => {
   };
 
   return (
-    <div className={`search-bar ${classNames ? classNames : ""}`} >
-      <Input
-        type="text"
-        onChange={onChange}
-        placeholder={props?.placeholder}
-        suffix={<Icon.Search />}
-      />
-      {/* <a className="icon-search" onClick={() => props.onClick(valueInput)}>
-        <Icon.Search />
-      </a> */}
-    </div>
+    <>
+      <div className="search-bar-wrapper">
+        <Input
+          type="text"
+          onChange={onChange}
+          placeholder={props?.placeholder}
+          />
+      </div>
+      <Icon.Search className="icon-search"/>
+    </>
   );
 };
 export default memo(SearchComponent);

@@ -1,15 +1,15 @@
 import React from 'react';
-
+// styles
 import './styles/styles.scss'
 import "./shared/assets/css/bootstrap.min.css"
 import "antd/dist/antd.css"
-import Home from './view/Home'
+// component
+import PublicPage from './router/component/PublicPage';
 
 const App = () => {
+  console.log("render public page")
   return (
-    <>
-      <Home />
-    </>
+    <PublicPage />
   );
 }
 

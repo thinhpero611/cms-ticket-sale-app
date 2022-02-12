@@ -7,28 +7,94 @@
   align-items: center;
 
   &__searchBar {
-    text-align: left;
-    color: $color--header-text;
-    
-    .search-bar {
-      width: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 16px;
+
+    position: absolute;
+    width: 437px;
+    height: 48px;
+    top: 17px;
+    left: 321px;
+    background: $color--search-bar-background;
+    border-radius: 12px;
+
+    .search-bar-wrapper > .ant-input {
+      position: static;
+      width: 361px;
+      height: 28px;
+      left: 16px;
+      top: 10px; 
+      background: $color--search-bar-background;
+      
+      /* 16 italic */
+      font-style: italic;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      display: flex;
+      align-items: center;
+
+      /* Text */
+      color: $color--search-bar-text;
+      opacity: 0.7;
+      border: none;
+    }
+
+    .search-bar-wrapper > .ant-input:focus {
+      box-shadow: none;
+    }
+
+    .icon-search {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      color: $color--search-bar-text;
+    }
+  }
+
+  .email {
+    position: absolute;
+    top: 33px;
+    right: 154px;
+
+    .icon__email > svg {
+      width: 18px;
+      height: 15px;
+      path {
+        stroke: $color--search-bar-text;
+        stroke-width: 2px;
+      }
     }
   }
 
   .bell {
-    position: relative;
-    width: fit-content;
-    margin: 0 1rem;
-  }
-  .avatar {
+    position: absolute;
+    top: 31px;
+    right: 107px;
 
+    .icon__bell > svg {
+      width: 20px;
+      height: 16px;
+      path {
+        stroke: $color--search-bar-text;
+        stroke-width: 2px;
+      }
+    }
+  }
+
+  .avatar {
+    position: absolute;
+    top: 17px;
+    right: 32px;
+    
     .avatar-img {
-      position: static;
       width: 48px;
       height: 48px;
-      left: 96px;
-      top: 0px;
-      border-radius: 30px;
+      border-radius: 24px;
+      object-fit: cover;
     }
   }
 }
+
