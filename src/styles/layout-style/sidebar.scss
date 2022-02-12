@@ -7,7 +7,7 @@ $padding-inside: 1rem;
 
 
 @mixin logo {
-  width: 70%;
+  width: 100%;
   min-width: $size-img;
 }
 
@@ -23,18 +23,6 @@ $padding-inside: 1rem;
   width: 252px;
   height: 572px;
 
-  &>.w-100 {
-    background-color: $color-sidebar;
-    height: 100vh;
-    border-radius: 16px;
-    position: fixed;
-    top: 0;
-  }
-
-  // &:hover{
-  //   width: 14vw;
-  // }
-
   .logo {
     position: absolute;
     top: 0;
@@ -45,25 +33,6 @@ $padding-inside: 1rem;
     img {
       margin: 4rem auto 8rem auto;
       @include logo();
-    }
-  }
-
-  .icon {
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 4rem;
-    height: 100vh;
-    position: absolute;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-
-    svg {
-      width: 2.6rem;
-      height: 2.6rem;
     }
   }
 
@@ -79,123 +48,67 @@ $padding-inside: 1rem;
     left: 0px;
     top: 117px;
 
-    .menu {
+    .menu--component--item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 252px;
+      height: 56px;
+      padding: 15px 16px 15px 24px;
+      z-index: 69;
+
       .item-label {
-        padding: 0.8rem 0rem;
         display: flex;
         flex-direction: row;
-        position: relative;
-        transition: 0.2s;
         align-items: center;
-        margin: 0rem $padding-inside;
-        justify-content: space-between;
-
-
-        &>span:first-child {
-          display: flex;
-          align-items: center;
-        }
-
-        &:hover {
-          opacity: 0.7;
-        }
 
         .item__nav {
-          // @include text-wrap;
-          font-weight: $font-weight-medium;
-          font-size: 1.6rem;
-          color: $color-sidebar-text;
-          //width: 14.5rem;
-          height: 100%;
-          max-width: 8vw;
+          position: absolute;
+          left: 60px;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 26px;
+          color: $color--main-text;
+          letter-spacing: 0.015em;
+          opacity: 0.7;
+          /* Inside auto layout */
+          flex: none;
+          order: 1;
+          flex-grow: 0;
+          margin: 0px 12px;
         }
 
         .item-hover__icon {
-          margin-right: 1rem;
-
-          // svg {
-          //   font-size: 3rem;
-          //   width: 2.6rem;
-          //   height: 2.6rem;
-          //   color: $color-sidebar-text;
-          // }
+          position: absolute;
+          left: 27px;
+          color: $color--main-text;
+          font-size: 20px;
+          margin-bottom: 10px;
         }
-
-        // .icon-3dot svg {
-        //   color: $color-sidebar-text;
-        //   font-size: 2.2rem;
-        //   width: 2.2rem;
-        //   height: 2.2rem;
-        // }
       }
 
-      .menu--component--item.menu-active {
-        position: relative;
-        background-color: #2F67BACC;
-
-        // .item__nav {
-        //   color: white;
-        // }
-
-        // .item-hover__icon svg {
-        //   color: #fff;
-        // }
-
-        // .icon-3dot svg {
-        //   color: #fff;
-        // }
-
-        // .icon-3dot {
-        //   color: white;
-        // }
+      &:hover {
+        opacity: 0.7;
       }
+    }
 
-      // .menu--component--item.three-dot {
-      //   cursor: pointer !important;
-      //   position: relative;
-
-      //   .icon-3dot {
-      //     font-size: 3rem;
-      //     margin-left: 1.2rem;
-      //     margin-top: -7px;
-      //     // line-height: 0;
-      //   }
-
-        // .dropdown-3dot {
-        //   display: none;
-        //   position: absolute;
-        //   top: 0;
-        //   background-color: white;
-        //   z-index: 99;
-        //   left: 100%;
-        //   border-radius: 0.8rem;
-        //   overflow-x: hidden;
-        //   width: 26.5rem;
-
-        //   &__item {
-        //     display: block;
-        //     text-align: left;
-        //     transition: 0.2s;
-        //     color: #6c7585;
-        //     font-size: 1.6rem;
-        //     padding: 1.1rem;
-
-        //     &:hover {
-        //       opacity: 0.7;
-        //     }
-        //   }
-
-        //   .active {
-        //     color: #1D519E;
-        //     background-color: #E1EDFF;
-        //     font-weight:500
-        //   }
-        // }
-
-        // &:hover .dropdown-3dot {
-        //   display: block;
-        // }
+    .menu--component--item.menu-active {
+      background-color: $color-background-active;
+      border-radius: 8px;
       
+      .item-label {
+        .item__nav {
+          color: $color__white;
+        }
+          
+        .item-hover__icon {
+          color: $color__white;
+          svg path {
+            stroke: $color__white;
+          }
+        }
+      }
     }
   }
 }

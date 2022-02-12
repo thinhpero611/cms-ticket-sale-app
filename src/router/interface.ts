@@ -11,7 +11,7 @@ export type IRouter = {
   name?: string;
   masterLayout?: boolean;
   menu?: {
-    icon?: ReactNode;
+    icon?: React.FC<any>;
     hideInNavbar?: boolean;
     exact?: boolean;
     activePath?: string[];

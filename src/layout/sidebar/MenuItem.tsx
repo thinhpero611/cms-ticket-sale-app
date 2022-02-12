@@ -17,16 +17,13 @@ const Item: React.FC<IMenu> = (props: IMenu) => {
   }, [location.pathname]);
 
   console.log("active nav item", active)
-
+  const Icon = item?.menu?.icon  
   return (
     <div className={`menu--component--item ${active}`}>
-      <Link to={item.path} >
-        <span className="item-hover__icon">{item?.menu?.icon}</span>
+      <Link to={item.path} className="item-label">
+        <span className="item-hover__icon">{Icon && <Icon />}</span>
         <span className="item__nav">
-          <FormattedMessage
-          id={item.name}
-          defaultMessage={item.name}
-          /> 
+          {item.name}
         </span>
       </Link>
     </div>

@@ -33,9 +33,7 @@ const SideBarComponent = () => {
         <img src={logo} alt="logo" />
       </div>
       <div className="mask">
-        <div className="menu">
-          <RenderMenu listNav={publicRouter} />
-        </div>
+        <RenderMenu listNav={publicRouter} />
       </div>
     </div>
   )
