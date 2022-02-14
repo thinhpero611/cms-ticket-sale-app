@@ -1,4 +1,4 @@
-import { HomeOutlined, SettingOutlined } from '@ant-design/icons'
+import { SettingOutlined } from '@ant-design/icons'
 import SettingComponent from '.'
 import { IRouter } from '../../router/interface'
 

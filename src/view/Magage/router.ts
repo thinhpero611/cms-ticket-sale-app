@@ -1,6 +1,6 @@
 import ManageTicket from '.'
 import { IRouter } from '../../router/interface'
-import { PaperListIcon, TicketIcon } from '../../shared/assets/icon'
+import { TicketIcon } from '../../shared/assets/icon'
 
 export const routerManage: IRouter = {
   path: "/manageTicket",

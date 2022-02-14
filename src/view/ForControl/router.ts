@@ -1,6 +1,6 @@
 import ForControl from '.'
 import { IRouter } from '../../router/interface'
-import { PaperListIcon, TicketIcon } from '../../shared/assets/icon'
+import { PaperListIcon } from '../../shared/assets/icon'
 
 export const routerForControl: IRouter = {
   path: "/forControl",

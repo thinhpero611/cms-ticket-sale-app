@@ -1,73 +1,84 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {  Content } from 'antd/lib/layout/layout';
+// datetime
+import moment from 'moment'
 // component
-import Frame from '../../shared/component/Frame1';
-import { Link } from 'react-router-dom';
+import DonutChart from '../../shared/component/DonutChart';
+import ReactApexChart from 'react-apexcharts';
 // styles
-import { Typography } from 'antd'
-import { ResponsiveContainer, PieChart, Pie } from "recharts";
-// import { Panel } from "react-bootstrap";
+import { Typography, Calendar, Button } from 'antd'
+import { FiCalendar } from 'react-icons/fi'
 
 const { Title } = Typography
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
+const data = [{ name: "network 1", value: 56024 }, { name: "network 3", value: 13568 }];
+const COLORS = ['#4F75FF', '#FF8A48'];
 
-const data = [{ name: "network 1", value: 2 }, { name: "network 3", value: 4 }];
-
+const data2 = {
+  series: [{
+    name: 'series1',
+    data: [31, 40, 28, 51, 42, 109, 100]
+  }, {
+    name: 'series2',
+    data: [11, 32, 45, 32, 34, 52, 41]
+  }],
+  options: {
+    chart: {
+      height: 350,
+      type: 'area'
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'smooth'
+    },
+    xaxis: {
+      type: 'datetime',
+      categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+    },
+    tooltip: {
+      x: {
+        format: 'dd/MM/yy HH:mm'
+      },
+    },
+  },
+}
 const Home = () => {
+  const [ isShowCalendar, setIsShowCalendar ] = useState(false)
   console.log("render home")
+  const hanldeShowCalendar = () => {
+    setIsShowCalendar(true)
+  }
+  const onPannelChange = (value, mode) => {
+    console.log(value, mode)
+  }
+
   return (
-    <Content>
-      <Title level={1}>Thong ke</Title>
-      {/* <Chart /> */}
-      <Title level={5}>Tong doanh thu theo tuan</Title>
-      <Title level={1}>525.142.000</Title><span>dong</span>
-      {/* <PieChart /> */}
-
-  <ResponsiveContainer width="100%" height={250}>
-    <PieChart height={250}>
-      <Pie
-        data={data}
-        cx="50%"
-        cy="50%"
-        innerRadius={80}
-        outerRadius={100}
-        fill="#8884d8"
-        dataKey="value"
-        label={({
-          cx,
-          cy,
-          midAngle,
-          innerRadius,
-          outerRadius,
-          value,
-          index
-        }) => {
-          console.log("handling label?");
-          const RADIAN = Math.PI / 180;
-          // eslint-disable-next-line
-          const radius = 25 + innerRadius + (outerRadius - innerRadius);
-          // eslint-disable-next-line
-          const x = cx + radius * Math.cos(-midAngle * RADIAN);
-          // eslint-disable-next-line
-          const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-          return (
-            <text
-              x={x}
-              y={y}
-              fill="#8884d8"
-              textAnchor={x > cx ? "start" : "end"}
-              dominantBaseline="central"
-
-            >
-              {data[index].name} ({value})
-            </text>
-          );
-        }}
-      />
-    </PieChart>
-  </ResponsiveContainer>
+    <Content className="home-component">
+      <Title level={1} className="main-title">Thong ke</Title>
+      <div className="chart">
+        <div className="label">
+          <h2>Doanh thu</h2>
+        </div>
+        <div className="calendar">
+          <p className="date-now">{moment.now}</p>
+          {isShowCalendar ? 
+          <Calendar fullscreen={false} onPanelChange={onPannelChange} /> : ""}
+          <Button onClick={hanldeShowCalendar} >
+            <FiCalendar className="icon__calendar" />
+          </Button>
+        </div>
+        {/* <ReactApexChart options={data2.options} series={data2?.series} type="area" height={350} /> */}
+       </div>
+      <div className="revenue"> 
+        <Title level={5}>Tong doanh thu theo tuan</Title>
+        <Title level={1}>525.142.000 <span className="unit">dong</span></Title>
+      </div>
+      <div className="chart2">
+        <DonutChart data={data} color={COLORS}/>
+        <DonutChart data={data} color={COLORS}/>
+      </div>
   </Content>
   )
 };
