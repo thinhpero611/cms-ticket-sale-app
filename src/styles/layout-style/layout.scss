@@ -1,6 +1,5 @@
 @import "../variable";
 
-
 .all-page-component {
   display: flex;
   height: 100%;
@@ -12,6 +11,7 @@
   color: $color--main-text !important;
   background: $color-background-layout !important;
 }
+
 .logo-header {
   width: 22.4rem;
   object-fit: contain;
@@ -19,7 +19,6 @@
   margin-top: 2.4rem;
   margin-left: 6.5rem;
 }
-
 
 .right-page-component {
   width: 100%;
