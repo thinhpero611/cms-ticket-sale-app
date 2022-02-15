@@ -4,10 +4,11 @@ import {  Content } from 'antd/lib/layout/layout';
 import moment from 'moment'
 // component
 import DonutChart from '../../shared/component/DonutChart';
-import ReactApexChart from 'react-apexcharts';
+import ReactApexChart from 'react-apexcharts';     
 // styles
 import { Typography, Calendar, Button } from 'antd'
 import { FiCalendar } from 'react-icons/fi'
+import DatePicker from '../../shared/component/Calendar';
 
 const { Title } = Typography
 
@@ -18,41 +19,23 @@ const data2 = {
   series: [{
     name: 'series1',
     data: [31, 40, 28, 51, 42, 109, 100]
-  }, {
-    name: 'series2',
-    data: [11, 32, 45, 32, 34, 52, 41]
   }],
   options: {
     chart: {
       height: 350,
       type: 'area'
     },
-    dataLabels: {
-      enabled: false
-    },
     stroke: {
       curve: 'smooth'
     },
     xaxis: {
-      type: 'datetime',
-      categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-    },
-    tooltip: {
-      x: {
-        format: 'dd/MM/yy HH:mm'
-      },
+      categories: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN']
     },
   },
 }
 const Home = () => {
-  const [ isShowCalendar, setIsShowCalendar ] = useState(false)
+  const [ state, setState ] = useState(data2)
   console.log("render home")
-  const hanldeShowCalendar = () => {
-    setIsShowCalendar(true)
-  }
-  const onPannelChange = (value, mode) => {
-    console.log(value, mode)
-  }
 
   return (
     <Content className="home-component">
@@ -61,24 +44,18 @@ const Home = () => {
         <div className="label">
           <h2>Doanh thu</h2>
         </div>
-        <div className="calendar">
-          <p className="date-now">{moment.now}</p>
-          {isShowCalendar ? 
-          <Calendar fullscreen={false} onPanelChange={onPannelChange} /> : ""}
-          <Button onClick={hanldeShowCalendar} >
-            <FiCalendar className="icon__calendar" />
-          </Button>
-        </div>
-        {/* <ReactApexChart options={data2.options} series={data2?.series} type="area" height={350} /> */}
+        <DatePicker />
+        <ReactApexChart options={state.options} series={state.series} type="area" height={350} />
        </div>
       <div className="revenue"> 
-        <Title level={5}>Tong doanh thu theo tuan</Title>
-        <Title level={1}>525.142.000 <span className="unit">dong</span></Title>
+        <p>Tong doanh thu theo tuan</p>
+        <h1>525.142.000 <span className="unit">dong</span></h1>
       </div>
-      <div className="chart2">
+      {/* <div className="chart2">
+        <DatePicker />
         <DonutChart data={data} color={COLORS}/>
         <DonutChart data={data} color={COLORS}/>
-      </div>
+      </div> */}
   </Content>
   )
 };

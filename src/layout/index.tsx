@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react'
-import HeaderComponent from './header'
-import SideBarComponent from './sidebar'
+import HeaderComponent from './Header'
+import SideBarComponent from './Sidebar'
 
 const Layout: React.FC<PropsWithChildren<any>> = (props) => {
   return (
