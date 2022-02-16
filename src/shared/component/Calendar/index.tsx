@@ -7,6 +7,7 @@ import { FiCalendar } from 'react-icons/fi'
 
 const DatePicker = () => {
     const [ isShowCalendar, setIsShowCalendar ] = useState(false)
+    const date = new Date()
     const hanldeShowCalendar = () => {
         setIsShowCalendar(!isShowCalendar)
       }
@@ -15,7 +16,7 @@ const DatePicker = () => {
       }
   return (
     <div className="calendar">
-          <p className="date-now">{moment.now()}</p>
+          <p className="date-now">{`Tháng ${date.getMonth() + 1}, ${date.getFullYear()}`}</p>
           {isShowCalendar ? 
           <Calendar fullscreen={false} onPanelChange={onPannelChange} /> : ""}
           <Button onClick={hanldeShowCalendar} >

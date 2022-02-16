@@ -2,6 +2,22 @@
 
 $light-grey: #888888;
 
+@mixin donut-chart-title {
+  /* 18 semibold */
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+  /* Text */
+  color: #1E0D03;
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 12px 0px;
+}
+
 .main-layout {
   position: relative;
   width: 1920px;
@@ -47,10 +63,8 @@ $light-grey: #888888;
       height: 28px;
       left: 0px;
       top: 1px;
-      .h2 {
+      h2 {
         position: static;
-        width: 100px;
-        height: 28px;
         left: 0px;
         top: calc(50% - 28px/2);
 
@@ -82,48 +96,7 @@ $light-grey: #888888;
       height: 40px;
       left: 1325px;
       top: 0px;
-
-      /* Background/Light/Primary#1 */
-      background: #FFFFFF;
-      border: 1px solid #E6E0E0;
-      box-sizing: border-box;
-      border-radius: 4px;
-
-      .icon__calendar {
-        position: absolute;
-        right: 12px;
-        top: 10px;
-        width: 18px;
-        height: 18px;
-        border: 2px solid #FF993C;
-      }
-
-      .date-now {
-        position: static;
-        width: 97px;
-        height: 22px;
-        left: 12px;
-        top: calc(50% - 22px/2);
-        font-style: normal;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 22px;
-        color: #1E0D03;
-        flex: none;
-        order: 0;
-        flex-grow: 0;
-        margin: 0px 10px;
-      }
     }
-  }
-
-  .outer-chart {
-    position: absolute;
-    width: 1411px;
-    height: 216px;
-    left: 101px;
-    top: 178px;
-
   }
 
   .revenue {
@@ -150,14 +123,14 @@ $light-grey: #888888;
       font-weight: bold;
       font-size: 24px;
       line-height: 30px;
-      span {
-        position: absolute;
-        left: 172px;
-        top: calc(50% - 22px/2 + 35.5px);
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 22px;
-      }
+    }
+    .currency {
+      position: absolute;
+      left: 172px;
+      top: 506px;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 22px;
     }
   }
 
@@ -165,5 +138,132 @@ $light-grey: #888888;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    
+    .calendar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 8px 12px;
+    
+      position: absolute;
+      width: 155px;
+      height: 40px;
+      left: 32px;
+      top: 611px;
+    }
+
+    .donut-chart {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0px;
+
+      position: absolute;
+      width: 301px;
+      height: 312px;
+      left: 287px;
+      top: 611px;
+      h2 {
+        position: absolute;
+        left: 94.5px;
+        top: calc(50% - 28px/2 - 142px);
+
+        @include donut-chart-title()
+      }
+      .donut-chart-inner {
+        position: absolute;
+        width: 301px;
+        height: 272px;
+        left: 0px;
+        top: 40px;
+        /* Inside auto layout */
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+        margin: 12px 0px;
+      }
+    }
+    /* override the second child element */
+    >.donut-chart:nth-child(2) {
+      position: absolute;
+      left: 736px;
+      top: 611px;
+      h2 {
+        position: absolute;
+        left: 99px;
+        top: calc(50% - 28px/2 - 142px);
+      }
+    }
+    .legend {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+
+      position: absolute;
+      width: 170px;
+      height: 60px;
+      left: 1185px;
+      top: 664px;
+
+      .item-legend {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0px;
+
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        /* Inside auto layout */
+
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        margin: 16px 0px;
+        .rectangle {
+          position: static;
+          width: 44px;
+          height: 20px;
+          left: 0px;
+          top: 1px;
+          background: #4F75FF;
+          border-radius: 4px;
+          /* Inside auto layout */
+          flex: none;
+          order: 0;
+          flex-grow: 0;
+          margin: 0px 8px;
+        }
+        h2 {
+          /* 14 regular */
+          font-family: Montserrat;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 22px;
+          /* Text */
+          color: #1E0D03;
+          /* Inside auto layout */
+          flex: none;
+          order: 0;
+          flex-grow: 0;
+          margin: 0px 8px;
+        }
+      }
+      >.item-legend:nth-child(2) {
+        left: 0px;
+        top: 38px;
+        order: 1;
+        .rectangle {
+          background: #FF8A48;
+          order: 1;
+        }
+        h2 {
+          order: 1;
+        }
+      }
+    }
   }
 }

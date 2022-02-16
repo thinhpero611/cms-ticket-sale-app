@@ -3,6 +3,7 @@ import React from 'react';
 import './styles/styles.scss'
 import "./shared/assets/css/bootstrap.min.css"
 import "antd/dist/antd.css"
+import "@ant-design/flowchart/dist/index.css"
 // component
 import PublicPage from './router/component/PublicPage';
 
