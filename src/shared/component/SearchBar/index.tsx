@@ -1,7 +1,7 @@
 import React, { useState, useEffect, memo } from "react";
 import * as Icon from "react-feather";
 import { Input } from "antd";
-// phan nay em tham khaor template cua cong ty a
+
 interface Iprops {
   classNames?: string;
   placeholder?: string;

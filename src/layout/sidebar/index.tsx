@@ -2,7 +2,7 @@ import React, { memo, PropsWithChildren } from 'react'
 import { publicRouter } from '../../router';
 import { IRouter } from '../../router/interface';
 import { logo } from '../../shared/assets/images'
-import MenuItem from './MenuItem';
+import Item from './MenuItem';
 
 interface IRenderMenuProps {
   listNav: Array<IRouter>;
@@ -17,7 +17,7 @@ const _RenderMenu: React.FC<IRenderMenuProps> = ({ listNav, location }: IRenderM
           return <React.Fragment key={index}> no menu</React.Fragment>;
         } else {
           console.log('render menu')
-          return <MenuItem data={item} key={index} />;
+          return <Item data={item} key={index} />;
         }
       })}
     </>
