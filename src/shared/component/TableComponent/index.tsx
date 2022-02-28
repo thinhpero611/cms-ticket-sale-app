@@ -32,7 +32,6 @@ const TableComponent = ( props: IBEPaginationTable ) => {
     pagination: { ...InitPagination, ...props.pagination },
     option: { ...defaultOption, ...InitOption }
   })
-  console.log(state)
   const intl = useIntl()
   // const [repository] = useAsync(apiServices||Promise.resolve); fetch data
 

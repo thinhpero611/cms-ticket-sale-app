@@ -4,35 +4,32 @@ import data2 from './data2'
 // components
 import { Content } from 'antd/lib/layout/layout'
 import MainTitle from '../../shared/component/MainTitle'
-import { Button, Modal, Radio, Checkbox, Tabs, Tag } from 'antd'
+import { Button, Modal, Tabs, Tag } from 'antd'
 import TableComponent from '../../shared/component/TableComponent'
-import RangePickerComponent from '../../shared/component/RangePickerComponent'
 // icons
 import { FiFilter } from 'react-icons/fi'
 import { GoPrimitiveDot } from 'react-icons/go'
 import { BsDash } from 'react-icons/bs'
+import FilterComonent from './components/FilterComponent'
 
 const { TabPane } = Tabs
 
 // interface
-interface IFilterTicketProps {
+export interface IFilterTicketProps {
   startDate?: Date
   endDate?: Date
   status?: string
   gates?: Array<any>
 }
+
 // initial setting
-const checkboxOptions = [ 1, 2, 3, 4, 5];
 const defaultCheckedList = [1];
 
 const ManageTicket = () => {
   const [state, setState] = useState<IFilterTicketProps>({ status: '', gates: defaultCheckedList})
   const [ tabKey, setTabKey ] = useState(1)
   const [ isShowModal, setIsShowModal ] = useState<boolean>(false)
-  const [checkAll, setCheckAll] = useState(false);
-  const [isDisableAll, setIsDisableAll] = useState(false)
 
-  console.log('current checked list',state.gates)
   const handleTabOnChange = (key: string) => {
     console.log(key)
     setTabKey(Number(key))
@@ -106,29 +103,7 @@ const ManageTicket = () => {
     setIsShowModal(false);
   };
 
-  const handleRadioGroupChange = (e) => {
-    console.log('value has been pick', e.target.value)
-    setState(prev => ({ ...prev, status: e.target.value}))
-  }
-
-  const onCheckboxGroupChange = list => {
-    setState(prev => ({ ...prev, gates: list}))
-    if (list.length === checkboxOptions.length) {
-      setCheckAll(true)
-      setIsDisableAll(true)
-    }
-  };
-  
-  const onCheckAllChange = e => {
-    setState(prev => ({
-       ...prev, 
-       gates: e.target.checked ? checkboxOptions : []
-    })) 
-    setCheckAll(e.target.checked);
-    setIsDisableAll(e.target.checked)
-  }
-
-  const hanleFilterTicket = () => {
+  const handleFilterTicket = () => {
     console.log(state)
     switch(state.status) {
       case 'expired': 
@@ -147,31 +122,12 @@ const ManageTicket = () => {
         visible={isShowModal} 
         onOk={handleOk} 
         onCancel={handleCancel} 
-        footer={[
-          <Button onClick={hanleFilterTicket}>Lọc</Button>
-        ]}
+        footer={[ <Button onClick={handleFilterTicket}>Lọc</Button>]}
       >
-        <p>Từ ngày</p>
-          <RangePickerComponent />
-        <p>Dến ngày</p>
-          <RangePickerComponent />
-        <p>Tình trạng sử dụng</p>
-        <Radio.Group onChange={handleRadioGroupChange}>
-          <Radio defaultChecked value="all">Tất cả</Radio>
-          <Radio value="ok">Đã sử dụng</Radio>
-          <Radio value="notUse">Chưa sử dụng</Radio>
-          <Radio value="expired">Hết hạn</Radio>
-        </Radio.Group>
-        <p>Cổng Check-In</p>
-        <Checkbox onChange={onCheckAllChange} checked={checkAll}>
-        Check all
-        </Checkbox>
-        <Checkbox.Group 
-          options={checkboxOptions} 
-          onChange={onCheckboxGroupChange} 
-          value={isDisableAll ? [] : state.gates} 
-          disabled={isDisableAll} 
-        />
+       <FilterComonent 
+        filter={state} 
+        setFilter={setState} 
+      />
       </Modal>
       
       <Tabs defaultActiveKey="1" onChange={handleTabOnChange} >

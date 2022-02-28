@@ -3,9 +3,9 @@ import {  Content } from 'antd/lib/layout/layout';
 // datetime
 import moment from 'moment'
 // component
-import DonutChart from '../../shared/component/DonutChart';
+import DonutChart from './components/DonutChart';
 import { Area } from '@ant-design/plots';       
-import DatePicker from '../../shared/component/Calendar';
+import DatePicker from './components/Calendar';
 // styles
 import { Typography} from 'antd'
 
