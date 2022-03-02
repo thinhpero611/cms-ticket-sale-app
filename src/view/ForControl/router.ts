@@ -4,7 +4,7 @@ import { PaperListIcon } from '../../shared/assets/icon'
 
 export const routerForControl: IRouter = {
   path: "/forControl",
-  component: ForControl,
+  component: ForControl,  
   exact: true,
   menu: {
     icon: PaperListIcon

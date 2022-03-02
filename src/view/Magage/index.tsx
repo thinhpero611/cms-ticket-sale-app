@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
-import data from './data'
-import data2 from './data2'
+import React, { useEffect, useMemo, useState } from 'react'
+// redux-store
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllEventTicketAsync, getAllFamilyTicketAsync, getAllTicketAsync, getFilterTicketAsync } from '../../module/ticket/repository'
+import { RootState } from '../../module'
 // components
 import { Content } from 'antd/lib/layout/layout'
 import MainTitle from '../../shared/component/MainTitle'
@@ -11,24 +13,40 @@ import { FiFilter } from 'react-icons/fi'
 import { GoPrimitiveDot } from 'react-icons/go'
 import { BsDash } from 'react-icons/bs'
 import FilterComonent from './components/FilterComponent'
+// constants
+import { status } from '../../module/ticket/constant'
 
 const { TabPane } = Tabs
 
 // interface
 export interface IFilterTicketProps {
-  startDate?: Date
-  endDate?: Date
+  startDate?: Date | string
+  endDate?: Date | string
   status?: string
   gates?: Array<any>
 }
 
 // initial setting
-const defaultCheckedList = [1];
+const defaultCheckedList = [];
 
 const ManageTicket = () => {
+  const ticket = useSelector((state: RootState) => state.ticket)
+  const dispatch = useDispatch()
   const [state, setState] = useState<IFilterTicketProps>({ status: '', gates: defaultCheckedList})
   const [ tabKey, setTabKey ] = useState(1)
   const [ isShowModal, setIsShowModal ] = useState<boolean>(false)
+  
+  // get data from fireabse
+  useEffect(() => {
+    // if (tabKey === 1) dispatch(getAllFamilyTicketAsync())
+    // else {
+    //   dispatch(getAllEventTicketAsync)
+    //   console.log('event ticket')
+    // }
+    dispatch(getAllTicketAsync())
+  }, [dispatch, tabKey])
+  
+  console.log('data', ticket.results)
 
   const handleTabOnChange = (key: string) => {
     console.log(key)
@@ -36,19 +54,14 @@ const ManageTicket = () => {
   }
   const columns = [
     {
-      title: 'STT',
-      dataIndex: 'stt',
-      key: 'stt'
-    },
-    {
       title: 'Booking code',
       dataIndex: 'bookingCode',
       key: 'bookingCode'
     },
     {
       title: 'Số vé',
-      dataIndex: 'ticket',
-      key: 'ticket'
+      dataIndex: 'ticketNumber',
+      key: 'ticketNumber'
     },
     {
       title: 'Tình trạng sử dụng',
@@ -56,13 +69,14 @@ const ManageTicket = () => {
       key: 'status',
       render: (record) => {
         let color= ''
+        let message = ''
         switch(record) {
-          case 'da su dung': color = ''; break
-          case 'het han': color = 'volcano'; break
-          case 'chua su dung': color = 'success'; break
+          case status.IN_USE: color = ''; message = 'Đã sử dụng'; break
+          case status.EXPIRED: color = 'volcano'; message = 'Hết hạn'; break
+          case status.NOT_USE: color = 'success'; message = 'Chưa sử dụng'; break
         }
         return (
-          <Tag color={color}><GoPrimitiveDot /> &nbsp; {record}</Tag>
+          <Tag color={color}><GoPrimitiveDot /> &nbsp; {message}</Tag>
         )
       }
     },
@@ -89,7 +103,7 @@ const ManageTicket = () => {
 
   // for event packs
   const column2s = [...columns]
-  column2s.splice(3, 0, { title: 'Tên sự kiện', dataIndex: 'event', key: 'event'})
+  column2s.splice(2, 0, { title: 'Tên sự kiện', dataIndex: 'event', key: 'event'})
 
   const handleShowModal = () => {
     setIsShowModal(true)
@@ -102,15 +116,20 @@ const ManageTicket = () => {
   const handleCancel = () => {
     setIsShowModal(false);
   };
-
+  
   const handleFilterTicket = () => {
-    console.log(state)
-    switch(state.status) {
-      case 'expired': 
-        data.filter(i => i.status !== 'het han')
-        break;
+    if (state.status == status.ALL) {
+      // if (tabKey === 1) dispatch(getAllFamilyTicketAsync())
+      // else {
+      //   dispatch(getAllEventTicketAsync)
+      //   console.log('event ticket')
+      // }
+      dispatch(getAllTicketAsync())
+      setIsShowModal(false)
+      return
     }
-    setIsShowModal(false);
+    dispatch(getFilterTicketAsync(state))
+    setIsShowModal(false)
   }
 
   return (
@@ -123,7 +142,7 @@ const ManageTicket = () => {
         onOk={handleOk} 
         onCancel={handleCancel} 
         footer={[ <Button onClick={handleFilterTicket}>Lọc</Button>]}
-      >
+        >
        <FilterComonent 
         filter={state} 
         setFilter={setState} 
@@ -132,10 +151,24 @@ const ManageTicket = () => {
       
       <Tabs defaultActiveKey="1" onChange={handleTabOnChange} >
         <TabPane tab="Gói gia đình" key="1" className="family-packs">
-          <TableComponent dataSource={data} columns={columns} search={{ placeholder: 'Tìm bằng số vé'}} />
+          <TableComponent 
+            hasStt={true} 
+            pagination={{ total: ticket.results.length }}
+            dataSource={ticket.results} 
+            columns={columns} 
+            search={{ placeholder: 'Tìm bằng số vé'}}
+            loading={!ticket.status}
+          />
         </TabPane>
         <TabPane tab="Gói sự kiện" key="2" className="event-packs">
-          <TableComponent dataSource={data2} columns={column2s} search={{ placeholder: 'Tìm bằng số vé'}}/>
+          <TableComponent 
+            hasStt={true} 
+            pagination={{ total: ticket.results.length }}
+            dataSource={ticket.results} 
+            columns={column2s} 
+            search={{ placeholder: 'Tìm bằng số vé'}}
+            loading={!ticket.status}
+          />
         </TabPane>
       </Tabs>
     </Content>

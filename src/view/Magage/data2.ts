@@ -38,3 +38,15 @@ data2.unshift({
 }
 )
 export default data2
+
+// for (let i = 0; i < 20; i++) {
+//   api.createTask({
+//     bookingCode: '123942342',
+//     event: 'Will AI invade human civiliztion (~.~)',
+//     ticketNumber: '1234535',
+//     status: status.NOT_USE,
+//     useDate: '12/02/21',
+//     outDate: '12/12/2022',
+//     gate: 'Cong 2'
+//   })
+// }

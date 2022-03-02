@@ -6,7 +6,7 @@ import Home from "./index";
 export const routerHome: IRouter = 
   {
     path: "/",
-    component: Home,
+    // component: Home,
     exact: true,
     menu: {
       icon: HomeOutlined

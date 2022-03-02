@@ -7,10 +7,10 @@ import React from 'react'
 export interface IBEPaginationTable extends TableProps<any> {
   apiServices?: Function;
   columns?: any[];
-  defaultOption?: OptionEntity;
+  option?: OptionEntity;
 //   register?: IRef;
 //   translateFirstKey?: string;
-//   getDataAfter?: (data) => void;
+  getDataAfter?: (data) => void;
   disableFirstCallApi?: boolean;
   search?: {
     placeholder: string;
@@ -32,7 +32,7 @@ export const InitOption: OptionEntity = {
     //   sortOrder: "",
     // },
 };
-  
+
 export const InitPagination: PaginationEntity = {
     pageSize: 12,
     total: 120,

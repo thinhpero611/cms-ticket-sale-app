@@ -17,6 +17,4 @@ export class PaginationEntity{
     this.search= lodash.get(pagination,"search",undefined);
     //Object.assign(this, pagination);
   }
-
-  
 }

@@ -4,7 +4,7 @@ import App from './App';
 // router
 import { BrowserRouter as Router} from 'react-router-dom'
 // store redux
-import { store } from './app/store';
+import { store } from './core/store';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 

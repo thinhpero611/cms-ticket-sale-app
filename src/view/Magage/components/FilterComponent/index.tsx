@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Checkbox, Button, Radio } from 'antd';
 import { IFilterTicketProps } from '../..';
 import RangePickerComponent from '../../../../shared/component/RangePickerComponent';
+import { status } from '../../../../module/ticket/constant';
 
 // interface 
 interface IProps {
@@ -47,10 +48,10 @@ const FilterComonent = ( props: IProps) => {
         <RangePickerComponent />
       <p>Tình trạng sử dụng</p>
       <Radio.Group onChange={handleRadioGroupChange}>
-        <Radio defaultChecked value="all">Tất cả</Radio>
-        <Radio value="ok">Đã sử dụng</Radio>
-        <Radio value="notUse">Chưa sử dụng</Radio>
-        <Radio value="expired">Hết hạn</Radio>
+        <Radio defaultChecked value={status.ALL}>Tất cả</Radio>
+        <Radio value={status.IN_USE}>Đã sử dụng</Radio>
+        <Radio value={status.NOT_USE}>Chưa sử dụng</Radio>
+        <Radio value={status.EXPIRED}>Hết hạn</Radio>
       </Radio.Group>
       <p>Cổng Check-In</p>
       <Checkbox onChange={onCheckAllChange} checked={checkAll}>

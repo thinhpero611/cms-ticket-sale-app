@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
+import dayjs from 'dayjs'
 // component
 import { Table } from 'antd'
 import SearchComponent from '../SearchBar'
@@ -12,6 +13,8 @@ import { OptionEntity } from '../../../core/table'
 
 // initial state 
 import { InitOption, InitPagination } from './interface'
+import { useSingleAsync } from '../../hook/useAsync'
+import TicketEntity from '../../../module/ticket/entity'
 
 interface  IState {
   pagination: PaginationEntity
@@ -22,38 +25,35 @@ const TableComponent = ( props: IBEPaginationTable ) => {
   let {
     apiServices,
     columns = [],
-    defaultOption,
+    option,
     disableFirstCallApi = false,
     dataSource = [],
     search,
     hasStt = false,
   } = props;
+  console.log(option)
   const [ state, setState ] = useState<IState>({
     pagination: { ...InitPagination, ...props.pagination },
-    option: { ...defaultOption, ...InitOption }
+    option: { ...InitOption, ...option }
   })
   const intl = useIntl()
-  // const [repository] = useAsync(apiServices||Promise.resolve); fetch data
-
+  console.log('current state: ', state)
+  
   useEffect(() => {
+    console.log('render')
     if (!disableFirstCallApi && apiServices) getDataWithCurrentState();
   }, [apiServices]);
-
+  
   const getDataWithCurrentState = (_state?: {
     pagination: PaginationEntity
-    option: OptionEntity
+    option: OptionEntity | undefined
   }) => {
     console.log('inside method get data with current state', _state)
     const pagination = Object.assign({}, state?.pagination, _state?.pagination)
     const option = Object.assign({}, state?.option, _state?.option)
-    setState(prev => ({ ...prev, pagination, option}))
-    // if (apiServices) {
-    //   // fetch data
-    // } else {
-    //   setState((prev) => ({ ...prev, pagination }));
-    // }
+    setState(prev => ({ ...prev, option, pagination }))
   }
-
+  
   const handleChangePage = (
     newPagination: PaginationEntity,
     _filter?,
@@ -61,7 +61,6 @@ const TableComponent = ( props: IBEPaginationTable ) => {
   ) => {
     let option = state.option;
     // option.sorter = _sorter;
-    console.log('new pagination', newPagination)
     let newCurrent = newPagination.current;
     if (newPagination.pageSize != state.pagination.pageSize) {
       newCurrent = 1;
@@ -80,6 +79,36 @@ const TableComponent = ( props: IBEPaginationTable ) => {
     }
     getDataWithCurrentState({ pagination, option })
   }
+
+  const getDataAfterConvert = (data) =>  data?.map((entity) => ({...entity,
+    key: entity.id,
+    useDate: dayjs.unix(entity?.useDate?.seconds).format('DD-MM-YYYY'),
+    outDate: dayjs.unix(entity?.outDate?.seconds).format('DD-MM-YYYY')
+  }))
+
+  const thisColumns = React.useMemo(() => {
+    // xét từng column một
+
+    if (hasStt) {
+      const hasSttColumn = {
+        title: intl.formatMessage({
+          id: "common.stt",
+          defaultMessage: "STT",
+        }),
+        width: "5.9rem",
+        className:'text-center',
+        dataIndex: "tableComponentStt",
+        render: (text, record, index) => {
+          const num =state.pagination.current||1;
+          const pageSize=state.pagination.pageSize||1
+          return ((num - 1) * pageSize) +(index + 1);
+        },
+      };
+      return [hasSttColumn, ...columns];
+    }
+    //dịch mỗi thằng
+    return columns
+  }, [hasStt, columns, state.pagination]);
 
   // const onRow = ( record, rowIndex ) => ({
   //   onClick: () => {
@@ -100,14 +129,14 @@ const TableComponent = ( props: IBEPaginationTable ) => {
       <Table
         {...props}
         className="main-table"
-        dataSource={dataSource}
+        dataSource={getDataAfterConvert(dataSource)}
         pagination={state.pagination}
         onChange={handleChangePage}
-        columns={columns}
-
+        columns={thisColumns}
+        loading={props.loading}
       />
     </div>
   )
 }
 
-export default TableComponent
+export default React.memo(TableComponent)
