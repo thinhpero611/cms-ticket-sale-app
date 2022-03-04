@@ -20,15 +20,8 @@ const { TabPane } = Tabs
 
 const ManageTicket = () => {
   const ticket = useSelector((state: RootState) => state.ticket)
-  const dispatch = useDispatch()
 
   const [ tabKey, setTabKey ] = useState(1)
-  
-  // get data from fireabse
-  useEffect(() => {
-    dispatch(getAllTicketAsync())
-  }, [dispatch])
-  
 
   const handleTabOnChange = (key: string) => {
     console.log(key)
@@ -94,7 +87,7 @@ const ManageTicket = () => {
       <Tabs defaultActiveKey="1" onChange={handleTabOnChange} >
         <TabPane tab="Gói gia đình" key="1" className="family-packs">
           <TableComponent 
-            apiServices={api.filterTicket}
+            apiServices={api.ticket.filterTicket}
             hasStt={true} 
             pagination={{ total: ticket.results.length }}
             dataSource={ticket.results} 
@@ -107,7 +100,7 @@ const ManageTicket = () => {
         </TabPane>
         <TabPane tab="Gói sự kiện" key="2" className="event-packs">
           <TableComponent 
-            apiServices={api.filterTicket}
+            apiServices={api.ticket.filterTicket}
             hasStt={true} 
             pagination={{ total: ticket.results.filter((item) => item.event != null).length }}
             dataSource={ticket.results.filter((item) => item.event != null)} 

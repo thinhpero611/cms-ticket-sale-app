@@ -28,7 +28,6 @@ const SearchComponent = (props: Iprops) => {
     }, 800)
   }, [props.onSearch])
 
-  
   useEffect(() => {
     if (!valueInput) return;
     console.log("on search effect")

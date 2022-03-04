@@ -5,7 +5,7 @@ import DatePickerComponent from '../../../shared/component/DatePickerComponent'
 import Text from 'antd/lib/typography/Text'
 import { status } from '../../../module/ticket/constant'
 import { IFilterTicketProps } from '../../Magage/components/FilterModalComponent'
-import DateRangePicker from '../../../shared/component/DateRangePicker'
+import DateRangePicker from '../../../shared/component/DateRangePickerComponent'
 
 interface Iprops {
   isEventTicket?: boolean

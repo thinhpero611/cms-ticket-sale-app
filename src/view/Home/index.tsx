@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import {  Content } from 'antd/lib/layout/layout';
-// datetime
-import moment from 'moment'
 // component
 import DonutChart from './components/DonutChart';
 import { Area } from '@ant-design/plots';       
 import DatePicker from './components/Calendar';
 // styles
 import { Typography} from 'antd'
+import { getAllTicketAsync } from '../../module/ticket/repository';
+import { useDispatch } from 'react-redux';
 
 const { Title } = Typography
 
@@ -18,9 +18,13 @@ const COLORS = ['#FF8A48', '#4F75FF'];
 
 const Home = () => {
   const [ data, setData ] = useState([])
+  const dispatch = useDispatch()
+
+  // get data from fireabse
   useEffect(() => {
+    dispatch(getAllTicketAsync())
     asyncFetch();
-  }, []);
+  }, [dispatch])
 
   const asyncFetch = () => {
     fetch('https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json')

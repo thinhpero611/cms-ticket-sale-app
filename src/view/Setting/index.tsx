@@ -1,20 +1,19 @@
 import React, { useEffect, useState} from 'react'
-import { Anchor, Button, Modal, Typography } from 'antd'
+import { Anchor, Button, Modal } from 'antd'
 import { Content } from 'antd/lib/layout/layout'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../module'
-import { getAllTicketAsync } from '../../module/ticket/repository'
 import MainTitle from '../../shared/component/MainTitle'
 import TableComponent from '../../shared/component/TableComponent'
 import AddComboTicket from './component/AddComboTicket'
 import UpdateComboTicket from './component/UpdateComboTicket'
 import { FiEdit } from 'react-icons/fi'
 import Text from 'antd/lib/typography/Text'
+import api from '../../core/firebase'
 
 
 const SettingComponent = () => {
-  const ticket  = useSelector((state: RootState) => state.ticket)
-  const dispatch = useDispatch()
+  const comboTicket  = useSelector((state: RootState) => state.comboTicket)
   const [ isShowModalAddTicket, setIsShowModalAddTicket ] = useState(false)
   const [ isShowModalUpdateTicket, setIsShowModalUpdateTicket ] = useState(false)
 
@@ -69,7 +68,7 @@ const SettingComponent = () => {
   const handleShowUpdateTicket = () => {
     setIsShowModalUpdateTicket(true)
   }
-  
+
   const handleUpdateTicket = () => {
     setIsShowModalUpdateTicket(false)
   }
@@ -106,12 +105,13 @@ const SettingComponent = () => {
         <UpdateComboTicket />
       </Modal>
       <TableComponent 
+        //@ts-ignore
+        apiServices={api.comboTicket.createTask}
         hasStt={true}
-        dataSource={ticket.results}
+        dataSource={comboTicket.results}
         columns={columns}
-        pagination={{ total: ticket.results.length}}
+        pagination={{ total: comboTicket.results.length}}
         search={{ placeholder: "Tìm bằng mã gói vé"}}
-        loading={!ticket.status}
       />
       <Button onClick={() => setIsShowModalUpdateTicket(true)}><Text underline>cập nhật</Text></Button>
     </Content>
