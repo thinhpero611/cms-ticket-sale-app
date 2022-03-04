@@ -9,7 +9,7 @@ interface IRangerPicker {
   defaultValue?: any;
 }
 
-const RangePickerComponent = (props: IRangerPicker) => {
+const DatePickerComponent = (props: IRangerPicker) => {
   return (
     <DatePicker
       defaultValue={props?.defaultValue}
@@ -23,4 +23,4 @@ const RangePickerComponent = (props: IRangerPicker) => {
   );
 };
 
-export default React.memo(RangePickerComponent);
+export default React.memo(DatePickerComponent);

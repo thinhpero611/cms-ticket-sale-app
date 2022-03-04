@@ -4,7 +4,7 @@ import { TicketIcon } from '../../shared/assets/icon'
 
 export const routerManage: IRouter = {
   path: "/manageTicket",
-  // component: ManageTicket,
+  component: ManageTicket,
   exact: true,
   menu: {
     icon: TicketIcon

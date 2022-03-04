@@ -2,8 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import TicketEntity from "./entity";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore"
-import { ColumnGroupType, ColumnType } from "antd/lib/table";
-import { IFilterTicketProps } from "../../view/Magage";
 import { status } from "./constant";
 
 export interface TicketState {

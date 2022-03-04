@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react'
-import { Button, Modal, Typography } from 'antd'
+import { Anchor, Button, Modal, Typography } from 'antd'
 import { Content } from 'antd/lib/layout/layout'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../module'
@@ -8,8 +8,9 @@ import MainTitle from '../../shared/component/MainTitle'
 import TableComponent from '../../shared/component/TableComponent'
 import AddComboTicket from './component/AddComboTicket'
 import UpdateComboTicket from './component/UpdateComboTicket'
+import { FiEdit } from 'react-icons/fi'
+import Text from 'antd/lib/typography/Text'
 
-const { Text } = Typography
 
 const SettingComponent = () => {
   const ticket  = useSelector((state: RootState) => state.ticket)
@@ -56,13 +57,19 @@ const SettingComponent = () => {
     {
       title: '',
       dataIndex: 'update',
-      key: 'update'
+      key: 'update',
+      render: (text, record) => (<Text onClick={handleShowUpdateTicket}><FiEdit /> &nbsp; cap nhap</Text>)
     }
   ]
 
   const hanleShowAddComboTicket = () => {
     setIsShowModalAddTicket(true)
   }
+
+  const handleShowUpdateTicket = () => {
+    setIsShowModalUpdateTicket(true)
+  }
+  
   const handleUpdateTicket = () => {
     setIsShowModalUpdateTicket(false)
   }

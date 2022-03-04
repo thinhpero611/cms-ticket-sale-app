@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import dayjs from 'dayjs'
 // component
-import { Table } from 'antd'
+import { Button, Table } from 'antd'
 import SearchComponent from '../SearchBar'
 // styles
-import { GoPrimitiveDot } from 'react-icons/go'
 // types
 import { IBEPaginationTable } from './interface'
 import { PaginationEntity } from '../../../core/pagination'
@@ -13,8 +12,11 @@ import { OptionEntity } from '../../../core/table'
 
 // initial state 
 import { InitOption, InitPagination } from './interface'
-import { useSingleAsync } from '../../hook/useAsync'
 import TicketEntity from '../../../module/ticket/entity'
+import FilterButton from '../../../view/Magage/components/FilterButton'
+import { useSingleAsync } from '../../hook/useAsync'
+import ExportFile from '../ExportFile'
+import EnableTicketButton from '../EnableTicketButton'
 
 interface  IState {
   pagination: PaginationEntity
@@ -31,29 +33,42 @@ const TableComponent = ( props: IBEPaginationTable ) => {
     search,
     hasStt = false,
   } = props;
-  console.log(option)
+
   const [ state, setState ] = useState<IState>({
     pagination: { ...InitPagination, ...props.pagination },
     option: { ...InitOption, ...option }
   })
   const intl = useIntl()
+
+  const repository = useSingleAsync<TicketEntity[]>(apiServices)  
+
   console.log('current state: ', state)
   
-  useEffect(() => {
-    console.log('render')
-    if (!disableFirstCallApi && apiServices) getDataWithCurrentState();
-  }, [apiServices]);
-  
   const getDataWithCurrentState = (_state?: {
-    pagination: PaginationEntity
-    option: OptionEntity | undefined
+    pagination?: PaginationEntity
+    option?: OptionEntity
   }) => {
-    console.log('inside method get data with current state', _state)
+    console.log('inside method get data with current state', state, _state)
     const pagination = Object.assign({}, state?.pagination, _state?.pagination)
     const option = Object.assign({}, state?.option, _state?.option)
-    setState(prev => ({ ...prev, option, pagination }))
+    setState(prev => ({ ...prev, option }))
+
+    if (apiServices && 
+      option.filter?.status !== undefined && 
+      option.filter?.isDoingForControl !== undefined &&
+      option.filter.status !== 'all' 
+      ) {
+      repository?.execute(option.filter).then((res) => {
+        setState(prev => ({
+          ...prev,
+          pagination: {...pagination, total: res.length}
+        }))
+      })
+    } else {
+      setState(prev => ({ ...prev, pagination}))
+    }
   }
-  
+  // console.log(repository?.value)
   const handleChangePage = (
     newPagination: PaginationEntity,
     _filter?,
@@ -115,6 +130,7 @@ const TableComponent = ( props: IBEPaginationTable ) => {
   //     handleClickOnRow(record)
   //   }
   // })
+
   return (
     <div className={`card-main-table ${props?.className ? props.className : ''}`}>
       {search?.placeholder && (
@@ -126,14 +142,20 @@ const TableComponent = ( props: IBEPaginationTable ) => {
           />
         </div>
       )}
+      {props.filterButton && (<FilterButton getFilterProps={getDataWithCurrentState} />)}
+      {props.exportButton && (<ExportFile className={props.exportButton.className} title={props.exportButton.title} />)}
+      {props.moreButton && (<EnableTicketButton className={props.moreButton.className} title={props.moreButton.title} />)}
       <Table
         {...props}
         className="main-table"
-        dataSource={getDataAfterConvert(dataSource)}
-        pagination={state.pagination}
+        dataSource={
+          state.option.filter?.status === 'all' || state.option?.filter?.status == undefined ? 
+          getDataAfterConvert(dataSource) : repository?.value
+        }
+        pagination={{ ...props.pagination, ...state.pagination }}
         onChange={handleChangePage}
         columns={thisColumns}
-        loading={props.loading}
+        loading={repository?.status === 'loading'}
       />
     </div>
   )

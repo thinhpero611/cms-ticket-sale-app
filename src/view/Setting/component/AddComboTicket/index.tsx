@@ -1,7 +1,7 @@
 import { Col, Input, Row, TimePicker, Checkbox, InputNumber, Select } from 'antd'
 import React from 'react'
 import Text from 'antd/lib/typography/Text'
-import RangePickerComponent from '../../../../shared/component/RangePickerComponent'
+import RangePickerComponent from '../../../../shared/component/DatePickerComponent'
 
 const { Option } = Select
 

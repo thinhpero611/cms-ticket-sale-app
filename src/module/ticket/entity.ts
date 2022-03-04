@@ -15,13 +15,15 @@ export interface ITicket {
 
 class TicketEntity {
     id?: string = ""
+    type?: string = ""
     bookingCode: string = ""
     ticketNumber: string = ""
     status: 'inUse' | 'notUse' | 'expired' = 'notUse'
     useDate: Date | string | firebase.firestore.Timestamp  = ""
     outDate: Date | string | firebase.firestore.Timestamp = ""
     gate?: string
-    event?: string = ""
+    event?: string | null = ""
+    isDoningForControlTicket?: boolean = false
     constructor(ticket) {
         if (!ticket) return
         Object.assign(this, ticket)

@@ -50,3 +50,19 @@ export default data2
 //     gate: 'Cong 2'
 //   })
 // }
+
+// set up data
+// const randomChoice = () => {
+  //     let random = Math.round(Math.random())
+  //     if (random === 0) return false
+  //     if (random === 1) return true
+  //     return false
+  //   }
+  //   // console.log('data', ticket.results)
+  //  const data = [...ticket.results]
+  //  const data2 = data.map((item) => ({ event: item.event ? item.event : null, type: 've cong', isDoningForControlTicket:randomChoice(), ...item }))
+  //   console.log(data2)
+  
+  //   for (let i = 0; i < data2.length; i++) {
+  //     api.updateTicket(data2[i])
+  //   }

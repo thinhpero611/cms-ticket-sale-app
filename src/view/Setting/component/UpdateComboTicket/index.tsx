@@ -1,7 +1,7 @@
 import { Checkbox, Col, Input, InputNumber, Row, Select, TimePicker } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import React from 'react'
-import RangePickerComponent from '../../../../shared/component/RangePickerComponent'
+import RangePickerComponent from '../../../../shared/component/DatePickerComponent'
 
 const { Option } = Select
 const UpdateComboTicket = () => {

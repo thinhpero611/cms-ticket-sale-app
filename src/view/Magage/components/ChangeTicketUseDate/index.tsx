@@ -1,7 +1,7 @@
 import { Col, Row } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import React from 'react'
-import RangePickerComponent from '../../../../shared/component/RangePickerComponent'
+import RangePickerComponent from '../../../../shared/component/DatePickerComponent'
 
 const ChangeDateUsing = () => {
   return (

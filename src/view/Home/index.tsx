@@ -55,6 +55,7 @@ const Home = () => {
 
   return (
     <Content className="home-component">
+      
       <Title level={1} className="main-title">Thống kê</Title>
       <div className="chart">
         <div className="label">
