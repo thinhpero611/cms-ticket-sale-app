@@ -100,8 +100,8 @@ const TableComponent = ( props: IBEPaginationTable ) => {
 
   const getDataAfterConvert = (data) =>  data?.map((entity) => ({...entity,
     key: entity.id,
-    useDate: dayjs.unix(entity?.useDate?.seconds).format('DD-MM-YYYY'),
-    outDate: dayjs.unix(entity?.outDate?.seconds).format('DD-MM-YYYY')
+    useDate: typeof(entity.useDate) !== 'string' ? dayjs.unix(entity?.useDate?.seconds).format('DD-MM-YYYY') : entity.useDate,
+    outDate: typeof(entity.outDate) !== 'string' ? dayjs.unix(entity?.outDate?.seconds).format('DD-MM-YYYY') : entity.outDate
   }))
 
   const thisColumns = React.useMemo(() => {
