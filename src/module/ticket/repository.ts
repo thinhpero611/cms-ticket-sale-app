@@ -7,13 +7,13 @@ import ticketStore from './ticketStore'
 export const getAllTicketAsync =  (): AppThunk => async (
     dispatch
 ) => {
-    const data = await api.fetchAll<TicketEntity>()
+    const data = await api.ticket.fetchAll<TicketEntity>()
     dispatch(ticketStore.actions.fetchAllData({results: data}))
 }
 
 export const getFilterTicketAsync = (filter: IFilterTicketProps): AppThunk => async (
     dispatch
 ) => {
-    const data = await api.filterTicket<TicketEntity>(filter)
+    const data = await api.ticket.filterTicket<TicketEntity>(filter)
     dispatch(ticketStore.actions.fetchAllData({ results: data }))
 }

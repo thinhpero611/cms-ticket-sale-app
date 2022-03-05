@@ -15,8 +15,6 @@ import { InitOption, InitPagination } from './interface'
 import TicketEntity from '../../../module/ticket/entity'
 import FilterButton from '../../../view/Magage/components/FilterButton'
 import { useSingleAsync } from '../../hook/useAsync'
-import ExportFile from '../ExportFile'
-import EnableTicketButton from '../EnableTicketButton'
 
 interface  IState {
   pagination: PaginationEntity
@@ -33,7 +31,7 @@ const TableComponent = ( props: IBEPaginationTable ) => {
     search,
     hasStt = false,
   } = props;
-
+  console.log(option)
   const [ state, setState ] = useState<IState>({
     pagination: { ...InitPagination, ...props.pagination },
     option: { ...InitOption, ...option }
@@ -42,6 +40,9 @@ const TableComponent = ( props: IBEPaginationTable ) => {
 
   const repository = useSingleAsync<TicketEntity[]>(apiServices)  
 
+  useEffect(() => {
+    if (apiServices) getDataWithCurrentState({ option: option})
+  }, [option])
   console.log('current state: ', state)
   
   const getDataWithCurrentState = (_state?: {
@@ -54,9 +55,9 @@ const TableComponent = ( props: IBEPaginationTable ) => {
     setState(prev => ({ ...prev, option }))
 
     if (apiServices && 
-      option.filter?.status !== undefined && 
-      option.filter?.isDoingForControl !== undefined &&
-      option.filter.status !== 'all' 
+      ((option.filter?.status !== undefined && 
+      option.filter.status !== 'all' ) ||
+       option.filter?.isDoingForControl !== undefined )
       ) {
       repository?.execute(option.filter).then((res) => {
         setState(prev => ({
@@ -68,7 +69,7 @@ const TableComponent = ( props: IBEPaginationTable ) => {
       setState(prev => ({ ...prev, pagination}))
     }
   }
-  // console.log(repository?.value)
+  console.log(repository?.value)
   const handleChangePage = (
     newPagination: PaginationEntity,
     _filter?,
@@ -143,16 +144,21 @@ const TableComponent = ( props: IBEPaginationTable ) => {
         </div>
       )}
       {props.filterButton && (<FilterButton getFilterProps={getDataWithCurrentState} />)}
-      {props.exportButton && (<ExportFile className={props.exportButton.className} title={props.exportButton.title} />)}
-      {props.moreButton && (<EnableTicketButton className={props.moreButton.className} title={props.moreButton.title} />)}
       <Table
         {...props}
         className="main-table"
         dataSource={
-          state.option.filter?.status === 'all' || state.option?.filter?.status == undefined ? 
+          (
+            (state.option.filter?.status === 'all' || 
+            state.option?.filter?.status == undefined ) && 
+            state.option?.filter?.isDoingForControl == undefined 
+          ) ?
           getDataAfterConvert(dataSource) : repository?.value
         }
-        pagination={{ ...props.pagination, ...state.pagination }}
+        pagination={{ 
+          ...props.pagination, 
+          ...state.pagination, 
+        }}
         onChange={handleChangePage}
         columns={thisColumns}
         loading={repository?.status === 'loading'}

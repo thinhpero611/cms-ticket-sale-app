@@ -19,14 +19,15 @@ const ticket = {
     return data
   },
   createTask: <T>(data): Promise<T | firebase.firestore.DocumentData | undefined> => {
+    console.log(data)
     return taskStore.add({
-        code: data.packCode,
+        code: data.packCode ? data.packCode : String(Math.round(Math.random()*10000000)),
         comboPrice: data.comboTicketPrice,
-        outDate: data.outDate,
+        outDate: data.outDate ? data.outDate : '22/02/2022',
         packName: data.ticketPackName,
         status: data.status,
         ticketPrice: data.ticketPrice,
-        useDate: data.useDate
+        useDate: data.useDate ? data.outDate : '22/02/2022'
     })
   },
   deleteTask: (id: string) => {

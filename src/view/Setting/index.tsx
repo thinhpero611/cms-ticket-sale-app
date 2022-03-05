@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react'
-import { Anchor, Button, Modal } from 'antd'
+import {  Button, Modal, Tag } from 'antd'
 import { Content } from 'antd/lib/layout/layout'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../module'
@@ -10,6 +10,9 @@ import UpdateComboTicket from './component/UpdateComboTicket'
 import { FiEdit } from 'react-icons/fi'
 import Text from 'antd/lib/typography/Text'
 import api from '../../core/firebase'
+import { status } from '../../module/ticket/constant'
+import { GoPrimitiveDot } from 'react-icons/go'
+import { getAllComboTicketAsync } from '../../module/comboTicket/repository'
 
 
 const SettingComponent = () => {
@@ -17,16 +20,23 @@ const SettingComponent = () => {
   const [ isShowModalAddTicket, setIsShowModalAddTicket ] = useState(false)
   const [ isShowModalUpdateTicket, setIsShowModalUpdateTicket ] = useState(false)
 
+  const dispatch = useDispatch()
+
+  // get data from fireabse
+  useEffect(() => {
+    dispatch(getAllComboTicketAsync())
+  }, [dispatch])
+
   const columns = [
     {
       title: 'Mã gói',
-      dataIndex: 'packCode',
-      key: 'packCode'
+      dataIndex: 'code',
+      key: 'code'
     },
     {
       title: 'Tên gói vé',
-      dataIndex: 'ticketPackName',
-      key: 'ticketPackName'
+      dataIndex: 'packName',
+      key: 'packName'
     },
     {
       title: 'Ngày áp dụng',
@@ -45,19 +55,26 @@ const SettingComponent = () => {
     },
     {
       title: 'Giá Combo (VNĐ/Combo)',
-      dataIndex: 'comboTicketPrice',
-      key: 'comboTicketPrice'
+      dataIndex: 'comboPrice',
+      key: 'comboPrice',
+      render: (text, record) => <Text>{text + ' VNĐ'}/{record.comboPrice /record.ticketPrice} vé</Text>
     },
     {
       title: 'Tình trạng',
       dataIndex: 'status',
-      key: 'status'
+      key: 'status',
+      render: (text, record) => {
+        if (text === true) 
+          return (<Tag color={"success"}><GoPrimitiveDot /> {status.COMBO_ACTIVE}</Tag>)
+        else  
+          return (<Tag color="volcano"><GoPrimitiveDot /> {status.COMBO_OFF}</Tag>)
+      }
     },
     {
       title: '',
       dataIndex: 'update',
       key: 'update',
-      render: (text, record) => (<Text onClick={handleShowUpdateTicket}><FiEdit /> &nbsp; cap nhap</Text>)
+      render: (text, record) => (<Text type='danger' onClick={handleShowUpdateTicket}><FiEdit /> &nbsp; cập nhập</Text>)
     }
   ]
 
@@ -72,10 +89,6 @@ const SettingComponent = () => {
   const handleUpdateTicket = () => {
     setIsShowModalUpdateTicket(false)
   }
-
-  const handleAddComboTicket = () => {
-    setIsShowModalAddTicket(false)
-  }
   
   return (
     <Content className="setting-component">
@@ -86,12 +99,9 @@ const SettingComponent = () => {
         visible={isShowModalAddTicket}
         onCancel={() => setIsShowModalAddTicket(false)}
         onOk={() => setIsShowModalAddTicket(false)}
-        footer={[
-          <Button onClick={() => setIsShowModalAddTicket(false)}>Hủy</Button>,
-          <Button onClick={handleAddComboTicket}>Lưu</Button>
-        ]}
+        footer={[]}
       >
-        <AddComboTicket />
+        <AddComboTicket setIsShowModalAddTicket={setIsShowModalUpdateTicket} />
       </Modal>
       <Modal title="Cập nhập thông gói vé"
         visible={isShowModalUpdateTicket}
@@ -105,15 +115,12 @@ const SettingComponent = () => {
         <UpdateComboTicket />
       </Modal>
       <TableComponent 
-        //@ts-ignore
-        apiServices={api.comboTicket.createTask}
         hasStt={true}
         dataSource={comboTicket.results}
         columns={columns}
         pagination={{ total: comboTicket.results.length}}
         search={{ placeholder: "Tìm bằng mã gói vé"}}
       />
-      <Button onClick={() => setIsShowModalUpdateTicket(true)}><Text underline>cập nhật</Text></Button>
     </Content>
   )
 }

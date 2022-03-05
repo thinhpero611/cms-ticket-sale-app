@@ -6,7 +6,6 @@ import { Area } from '@ant-design/plots';
 import DatePicker from './components/Calendar';
 // styles
 import { Typography} from 'antd'
-import { getAllTicketAsync } from '../../module/ticket/repository';
 import { useDispatch } from 'react-redux';
 
 const { Title } = Typography
@@ -22,7 +21,6 @@ const Home = () => {
 
   // get data from fireabse
   useEffect(() => {
-    dispatch(getAllTicketAsync())
     asyncFetch();
   }, [dispatch])
 

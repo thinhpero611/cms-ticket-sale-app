@@ -7,7 +7,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         // Ignore these action types
-        ignoredActions: ['ticket/fetchAllData', 'comboTicket/fetchAllData'],
+        ignoredActions: ['ticket/fetchAllData', 'comboTicket/fetchAllData', 'comboTicket/createComboTicket', 'ticket/createComboTicket'],
         // Ignore these field paths in all actions
         ignoredActionPaths: ['meta.arg', 'payload.timestamp'],
         // Ignore these paths in the state

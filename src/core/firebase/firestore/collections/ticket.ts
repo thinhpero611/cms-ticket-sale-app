@@ -42,7 +42,7 @@ const ticket = {
   },
   filterTicketForControl: <T>( filter: IFilterTicketProps): Promise<T[] | firebase.firestore.DocumentData[]> => {
     return taskStore
-          .where("isDoingForControl", "==", filter?.isDoingForControl)
+          .where("isDoingForControlTicket", "==", filter.isDoingForControl)
           .get()
           .then((snapshot: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData | T>) => {
             return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data()}))

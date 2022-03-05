@@ -5,7 +5,6 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore"
 // import { IRef } from "./hook";
 import React, { ReactNode } from 'react'
-import { AppDispatch, AppThunk } from "../../../core/store";
 
 export interface IBEPaginationTable extends TableProps<any> {
   apiServices?: (any) => Promise<firebase.firestore.DocumentData[]>
@@ -19,14 +18,6 @@ export interface IBEPaginationTable extends TableProps<any> {
     className?: string;
   }
   filterButton?: {
-    className?: string
-    title?: string
-  }
-  exportButton?: {
-    className?: string
-    title?: string
-  }
-  moreButton?: {
     className?: string
     title?: string
   }

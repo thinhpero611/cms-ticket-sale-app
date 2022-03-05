@@ -14,9 +14,13 @@ interface Iprops {
 
 const { Option } = Select
 const RightFilterComponent = ( props: Iprops ) => {
-  const [ state, setState ] = useState<IFilterTicketProps>({})
+  // console.log(state)
   const onRadioGroupChange = (e) => {
-    props.getFilter(prev => ({ ...prev, isDoingForControl: e.target.value}))
+    if (e.target.value === 'all') {
+      props.getFilter(prev => ({ ...prev, isDoingForControl: undefined}))
+      return
+    }
+    props.getFilter(prev => ({ ...prev, isDoingForControl: e.target.value === status.DOING_FORCONTROL}))
   }
   
   const hanldeOnChangeSelect = (value) => {

@@ -15,11 +15,17 @@ import { BsDash } from 'react-icons/bs'
 import { status } from '../../module/ticket/constant'
 import api from '../../core/firebase'
 import FilterButton from './components/FilterButton'
+import ExportFile from '../../shared/component/ExportFile'
 
 const { TabPane } = Tabs
 
 const ManageTicket = () => {
   const ticket = useSelector((state: RootState) => state.ticket)
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    dispatch(getAllTicketAsync())
+  }, [dispatch])
 
   const [ tabKey, setTabKey ] = useState(1)
 
@@ -86,6 +92,7 @@ const ManageTicket = () => {
       
       <Tabs defaultActiveKey="1" onChange={handleTabOnChange} >
         <TabPane tab="Gói gia đình" key="1" className="family-packs">
+          <ExportFile className={""} title={"Xuất file (.csv)"} />
           <TableComponent 
             apiServices={api.ticket.filterTicket}
             hasStt={true} 
@@ -93,12 +100,12 @@ const ManageTicket = () => {
             dataSource={ticket.results} 
             columns={columns} 
             search={{ placeholder: 'Tìm bằng số vé'}}
-            exportButton={{ title: 'Xuat file (.csv)'}}
-            filterButton={{ title: 'Loc'}}
+            filterButton={{ title: 'Lọc'}}
             loading={!ticket.status}
           />
         </TabPane>
         <TabPane tab="Gói sự kiện" key="2" className="event-packs">
+          <ExportFile className={""} title={"Xuất file (.csv)"} />
           <TableComponent 
             apiServices={api.ticket.filterTicket}
             hasStt={true} 

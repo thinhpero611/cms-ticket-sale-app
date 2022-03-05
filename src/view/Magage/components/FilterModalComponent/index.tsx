@@ -23,7 +23,7 @@ export interface IFilterTicketProps {
   endDate?: Date | string
   status?: string
   gates?: Array<any>
-  isDoingForControl?: string
+  isDoingForControl?: boolean
   event?: string
 }
 

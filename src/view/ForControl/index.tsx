@@ -10,14 +10,16 @@ import Text from 'antd/lib/typography/Text'
 import RightFilterComponent from './RightFilterComponent'
 import { IFilterTicketProps } from '../Magage/components/FilterModalComponent'
 import api from '../../core/firebase'
+import ExportFile from '../../shared/component/ExportFile'
+import EnableTicketButton from '../../shared/component/EnableTicketButton'
 
 const { TabPane } = Tabs
 
 const ForControl = () => {
   const tickets = useSelector((state: RootState) => state.ticket)
   const [ tabKey, setTabKey ] = useState(1)
-  const [ state, setState ] = useState<IFilterTicketProps>({})
-
+  const [ state, setState ] = useState<IFilterTicketProps>({ isDoingForControl: undefined})
+  console.log(state)
   const columns = [
     {
       title: 'Booking code',
@@ -37,8 +39,8 @@ const ForControl = () => {
     },
     {
       title: 'Tên loại vé',
-      dataIndex: 'ticketType',
-      key: 'ticketType',
+      dataIndex: 'type',
+      key: 'type',
       render: (text, record, index) => (<span>{text}</span>)
     },
     {
@@ -52,11 +54,12 @@ const ForControl = () => {
     },
     {
       title: '',
-      dataIndex: 'forControlStatus',
-      key: 'forControlStatus',
+      dataIndex: 'isDoingForControlTicket',
+      key: 'isDoingForControlTicket',
       render: (text, record, index) => {
-        if (!record.forControlStatus) return (<Text italic>Chưa đối soát</Text>)
-        if (record.forControlStatus) return (<Text type="danger" italic>Da đối soát</Text>)
+        if (!text) return (<Text italic>Chưa đối soát</Text>)
+        if (text) return (<Text type="danger" italic>Da đối soát</Text>)
+      
       }
     }
   ]
@@ -76,30 +79,31 @@ const ForControl = () => {
       <MainTitle index={1} title="Đối soát vé " />
       <Tabs defaultActiveKey="1" onChange={handleChangeTabKey} className="table-in-tabs">
         <TabPane key="1" tab="Goi gia dinh">
+          {state.isDoingForControl && (<ExportFile className={""} title={"Xuất file (.csv)"} />)}
+          {!state.isDoingForControl && (<EnableTicketButton className={""} title={"Chốt đối soát"} />)}
           <TableComponent 
-            apiServices={api.filterTicketForControl}
+            apiServices={api.ticket.filterTicketForControl}
             hasStt={true}
             columns={columns}
             dataSource={tickets.results}
             pagination={{ total: tickets.results.length}}
-            option={{ filter: state}}
+            option={{ filter: {...state}}}
             loading={!tickets.status}
             search={{ placeholder: "Tìm bằng số vé"}}
-            moreButton={{ title: "Chot doi soat"}}
-            exportButton={{ title: "Xuat file (.csv)"}}
-          /> 
+            /> 
         </TabPane>
         <TabPane key="2" tab="Goi su kien">
+          {state.isDoingForControl && (<ExportFile className={""} title={"Xuất file (.csv)"} />)}
+          {!state.isDoingForControl && (<EnableTicketButton className={""} title={"Chốt đối soát"} />)}
           <TableComponent 
-            apiServices={api.filterTicketForControl}
+            apiServices={api.ticket.filterTicketForControl}
             hasStt={true}
             columns={column2s}
             dataSource={tickets.results.filter((item) => item.event !== null)}
             pagination={{ total: tickets.results.filter((item) => item.event !== null).length}}
+            option={{ filter: {...state}}}
             loading={!tickets.status}
             search={{ placeholder: "Tìm bằng số vé"}}
-            moreButton={{ title: "Chot doi soat"}}
-            exportButton={{ title: "Xuat file (.csv)"}}
           /> 
         </TabPane>
       </Tabs>
