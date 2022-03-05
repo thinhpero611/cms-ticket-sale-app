@@ -30,7 +30,7 @@ export interface IBEPaginationTable extends TableProps<any> {
 export const InitOption: OptionEntity = {
     search: "",
     // tới dự án nào dùng tới filter sorter rồi bỏ comment ra nha
-    filter: {},
+    filter: { status: 'all'},
     // sorter: {
     //   sortField: "",
     //   sortOrder: "",

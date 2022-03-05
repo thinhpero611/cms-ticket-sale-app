@@ -18,7 +18,7 @@ const { TabPane } = Tabs
 const ForControl = () => {
   const tickets = useSelector((state: RootState) => state.ticket)
   const [ tabKey, setTabKey ] = useState(1)
-  const [ state, setState ] = useState<IFilterTicketProps>({ isDoingForControl: undefined})
+  const [ state, setState ] = useState<IFilterTicketProps>({ isDoingForControl: 'all'})
   console.log(state)
   const columns = [
     {

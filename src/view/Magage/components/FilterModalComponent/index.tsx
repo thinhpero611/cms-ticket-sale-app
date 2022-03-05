@@ -23,7 +23,7 @@ export interface IFilterTicketProps {
   endDate?: Date | string
   status?: string
   gates?: Array<any>
-  isDoingForControl?: boolean
+  isDoingForControl?: boolean | 'all'
   event?: string
 }
 
@@ -32,7 +32,7 @@ const defaultCheckedList = [];
 const checkboxOptions = [ 1, 2, 3, 4, 5 ];
 
 const FilterComponent = ( props: IProps) => {
-  const [state, setState] = useState<IFilterTicketProps>({ status: '', gates: defaultCheckedList})
+  const [state, setState] = useState<IFilterTicketProps>({ status: 'all', gates: defaultCheckedList})
   const [checkAll, setCheckAll] = useState(false)
   const [isDisableAll, setIsDisableAll] = useState(false)
 

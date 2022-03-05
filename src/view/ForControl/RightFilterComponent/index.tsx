@@ -17,7 +17,7 @@ const RightFilterComponent = ( props: Iprops ) => {
   // console.log(state)
   const onRadioGroupChange = (e) => {
     if (e.target.value === 'all') {
-      props.getFilter(prev => ({ ...prev, isDoingForControl: undefined}))
+      props.getFilter(prev => ({ ...prev, isDoingForControl: 'all'}))
       return
     }
     props.getFilter(prev => ({ ...prev, isDoingForControl: e.target.value === status.DOING_FORCONTROL}))

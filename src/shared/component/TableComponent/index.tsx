@@ -53,11 +53,13 @@ const TableComponent = ( props: IBEPaginationTable ) => {
     const pagination = Object.assign({}, state?.pagination, _state?.pagination)
     const option = Object.assign({}, state?.option, _state?.option)
     setState(prev => ({ ...prev, option }))
-
+    console.log(option.filter?.status !== 'all'  ||
+    option.filter?.isDoingForControl !== 'all')
     if (apiServices && 
-      ((option.filter?.status !== undefined && 
-      option.filter.status !== 'all' ) ||
-       option.filter?.isDoingForControl !== undefined )
+        (
+          (option.filter?.status !== 'all' && option.filter?.status !== undefined)  ||
+          (option.filter?.isDoingForControl !== 'all' && option.filter?.isDoingForControl !== undefined)
+        ) 
       ) {
       repository?.execute(option.filter).then((res) => {
         setState(prev => ({
@@ -131,7 +133,7 @@ const TableComponent = ( props: IBEPaginationTable ) => {
   //     handleClickOnRow(record)
   //   }
   // })
-
+  
   return (
     <div className={`card-main-table ${props?.className ? props.className : ''}`}>
       {search?.placeholder && (
@@ -149,16 +151,16 @@ const TableComponent = ( props: IBEPaginationTable ) => {
         className="main-table"
         dataSource={
           (
-            (state.option.filter?.status === 'all' || 
-            state.option?.filter?.status == undefined ) && 
-            state.option?.filter?.isDoingForControl == undefined 
+            (
+              state.option.filter?.status === 'all'  ||
+              state.option.filter?.isDoingForControl === 'all'
+            ) 
           ) ?
           getDataAfterConvert(dataSource) : repository?.value
         }
         pagination={{ 
-          ...props.pagination, 
           ...state.pagination, 
-          total: state.option?.filter?.status === 'all' ? dataSource?.length : state.pagination.total
+          total: state.option?.filter?.status === 'all' || state.option?.filter?.isDoingForControl === 'all' ? dataSource?.length : state.pagination.total
         }}
         onChange={handleChangePage}
         columns={thisColumns}
