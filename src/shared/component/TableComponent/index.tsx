@@ -31,7 +31,7 @@ const TableComponent = ( props: IBEPaginationTable ) => {
     search,
     hasStt = false,
   } = props;
-  console.log(option)
+
   const [ state, setState ] = useState<IState>({
     pagination: { ...InitPagination, ...props.pagination },
     option: { ...InitOption, ...option }
@@ -128,11 +128,13 @@ const TableComponent = ( props: IBEPaginationTable ) => {
     return columns
   }, [hasStt, columns, state.pagination]);
 
-  // const onRow = ( record, rowIndex ) => ({
-  //   onClick: () => {
-  //     handleClickOnRow(record)
-  //   }
-  // })
+  const onRow = ( record, rowIndex ) => (
+    {
+    onClick: () => {
+      props.setCurrentId(record.id)
+    }
+  }
+  )
   
   return (
     <div className={`card-main-table ${props?.className ? props.className : ''}`}>
@@ -165,6 +167,7 @@ const TableComponent = ( props: IBEPaginationTable ) => {
         onChange={handleChangePage}
         columns={thisColumns}
         loading={repository?.status === 'loading'}
+        onRow={onRow}
       />
     </div>
   )

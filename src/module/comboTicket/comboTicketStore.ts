@@ -27,7 +27,7 @@ const comboTicketStore  = createSlice({
         createComboTicket: (state, action: PayloadAction<{ data: firebase.firestore.DocumentData | ComboTicketEntity | undefined }>) => {
             Object.assign(state, {
                 status: action.payload.data !== null,
-                results: [ action.payload.data ]
+                results: [ ...state.results, action.payload.data ]
             })
         }
     }

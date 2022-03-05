@@ -1,38 +1,42 @@
 import React, { useEffect, useMemo, useState } from 'react'
+// api
+import api from '../../core/firebase'
 // redux-store
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllTicketAsync, getFilterTicketAsync } from '../../module/ticket/repository'
+import { getAllTicketAsync } from '../../module/ticket/repository'
 import { RootState } from '../../module'
 // components
 import { Content } from 'antd/lib/layout/layout'
 import MainTitle from '../../shared/component/MainTitle'
 import { Button, Modal, Tabs, Tag } from 'antd'
 import TableComponent from '../../shared/component/TableComponent'
+import ExportFile from '../../shared/component/ExportFile'
+import ChangeDateUsing from './components/ChangeTicketUseDate'
 // icons
 import { GoPrimitiveDot } from 'react-icons/go'
 import { BsDash } from 'react-icons/bs'
+import { BiDotsVerticalRounded } from 'react-icons/bi'
 // constants
 import { status } from '../../module/ticket/constant'
-import api from '../../core/firebase'
-import FilterButton from './components/FilterButton'
-import ExportFile from '../../shared/component/ExportFile'
 
 const { TabPane } = Tabs
 
 const ManageTicket = () => {
   const ticket = useSelector((state: RootState) => state.ticket)
+  const [ isShowModal, setIsShowModal ] = useState(false)
+  const [ currentId, setCurrentId ] = useState('0')
+  const [ tabKey, setTabKey ] = useState(1)
   const dispatch = useDispatch()
   
   useEffect(() => {
     dispatch(getAllTicketAsync())
   }, [dispatch])
 
-  const [ tabKey, setTabKey ] = useState(1)
-
   const handleTabOnChange = (key: string) => {
     console.log(key)
     setTabKey(Number(key))
   }
+
   const columns = [
     {
       title: 'Booking code',
@@ -79,6 +83,14 @@ const ManageTicket = () => {
         if (record) return record
         return <BsDash />
       }
+    }, 
+    {
+      title: '',
+      dataIndex: 'update',
+      key: 'update',
+      render: (text, record) => {
+        if (record.status === status.NOT_USE) return (<div onClick={handleShowChangeDateModal}><BiDotsVerticalRounded /></div>)
+      }
     }
   ]
 
@@ -86,10 +98,13 @@ const ManageTicket = () => {
   const column2s = [...columns]
   column2s.splice(2, 0, { title: 'Tên sự kiện', dataIndex: 'event', key: 'event'})
 
+  const handleShowChangeDateModal = () => {
+    setIsShowModal(true)
+  }
+
   return (
     <Content className="manage-component">
       <MainTitle title="Danh sách vé" index={1} />
-      
       <Tabs defaultActiveKey="1" onChange={handleTabOnChange} >
         <TabPane tab="Gói gia đình" key="1" className="family-packs">
           <ExportFile className={""} title={"Xuất file (.csv)"} />
@@ -102,6 +117,7 @@ const ManageTicket = () => {
             search={{ placeholder: 'Tìm bằng số vé'}}
             filterButton={{ title: 'Lọc'}}
             loading={!ticket.status}
+            setCurrentId={setCurrentId}
           />
         </TabPane>
         <TabPane tab="Gói sự kiện" key="2" className="event-packs">
@@ -114,9 +130,22 @@ const ManageTicket = () => {
             columns={column2s} 
             search={{ placeholder: 'Tìm bằng số vé'}}
             loading={!ticket.status}
+            setCurrentId={setCurrentId}
           />
         </TabPane>
       </Tabs>
+      <Modal 
+        key="4"
+        title="Đổi ngày sử dụng vé"
+        visible={isShowModal}
+        onCancel={() => setIsShowModal(false)}
+        onOk={() => setIsShowModal(false)}
+        footer={[
+          <Button onClick={() => setIsShowModal(false)}>Hủy</Button>,
+          <Button onClick={() => setIsShowModal(false)}>Lưu</Button>
+        ]}>
+          <ChangeDateUsing currentId={currentId} isEventTicket={tabKey === 2}/>
+        </Modal>
     </Content>
   )
 }

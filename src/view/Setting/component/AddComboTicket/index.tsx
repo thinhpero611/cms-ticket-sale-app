@@ -5,49 +5,38 @@ import { status } from '../../../../module/ticket/constant'
 import DateRangePicker from '../../../../shared/component/DateRangePickerComponent'
 import InputNumberComponent from '../../../../shared/component/InputNumberComponent'
 import ComboTicketEntity from '../../../../module/comboTicket/entity'
-import { useDispatch } from 'react-redux'
-import { createComboTicket } from '../../../../module/comboTicket/repository'
 
 const { Option } = Select
 
 interface Iprops {
-  setIsShowModalAddTicket: React.Dispatch<React.SetStateAction<boolean>>
+  setComboTicket: React.Dispatch<React.SetStateAction<ComboTicketEntity>>
 }
-const AddComboTicket: React.FC<Iprops> = ({ setIsShowModalAddTicket }) => {
-  const [ state, setState ] = useState<ComboTicketEntity>({ status: true })
-  const dispatch = useDispatch()
+const AddComboTicket: React.FC<Iprops> = ({ setComboTicket }) => {
+ 
   const [ price, setPirce ] = useState<number>(0)
   const [ comboPrice, setComboPrice ] = useState<number>(0)
   const [ ticketQuantity , setTicketQuantity ] = useState<number>(0)
-  console.log('add combo ticket render', state)
   const handleCheckboxChange = (list) => {
     console.log(list)
-    setState(prev => ({ 
+    if (list[0] < list[1])
+    setComboTicket(prev => ({ 
       ...prev, 
-      ticketPrice: list[0], 
-      comboTicketPrice: ticketQuantity ? price * ticketQuantity : 0
+      ticketPrice: list[0] || 0 , 
+      comboTicketPrice: list[1] || 0
     }))
   }
 
   const handleSelectChange = (value) => {
     console.log(value)
     if (!value) return
-    setState({ ...state, status: value === status.COMBO_ACTIVE })
-  }
-  
-  const handleAddComboTicket = () => {
-    if (state.ticketPackName && state.status !== undefined) {
-      dispatch(createComboTicket(state))
-      setIsShowModalAddTicket(false)
-    }
-    setIsShowModalAddTicket(false)
+    setComboTicket(prev => ({ ...prev, status: value === status.COMBO_ACTIVE }))
   }
 
   return (
       <div className="add-combo-ticker-card">
         <div className="combo-ticker__add-name">
           <Text>Tên gói vé<sup style={{color: 'red'}}>*</sup></Text>
-          <Input onChange={(e) => setState({ ...state, ticketPackName: e.target.value})} placeholder="Nhập tên gói vé" />
+          <Input onChange={(e) => setComboTicket(prev => ({ ...prev, ticketPackName: e.target.value}))} placeholder="Nhập tên gói vé" />
         </div>
         <div className="combo-ticker__date-range-picker">
           <DateRangePicker hasTimePicker={true}  />
@@ -58,7 +47,7 @@ const AddComboTicket: React.FC<Iprops> = ({ setIsShowModalAddTicket }) => {
             <Checkbox value={price}>Vé lẻ (vnđ/vé) với giá <InputNumberComponent handleChange={setPirce} placeholder='giá vé' width="150px" /> / <span>vé</span></Checkbox>
             <Checkbox value={ticketQuantity && ticketQuantity* price }>
               Combo vé với giá 
-              <InputNumberComponent placeholder='số vé' width="150px" /> / 
+              <InputNumberComponent value={price * ticketQuantity} placeholder='số vé' width="150px" /> / 
               <InputNumberComponent handleChange={setTicketQuantity} width="70px" placeholder='giá vé' /> <span>vé</span>
             </Checkbox>
           </Checkbox.Group>
@@ -70,10 +59,6 @@ const AddComboTicket: React.FC<Iprops> = ({ setIsShowModalAddTicket }) => {
           <Option value={status.COMBO_OFF}>Tắt</Option>
           </Select>
           <Text italic><sup style={{color: 'red'}}>*</sup>là thông tin bắt buột</Text>
-        </div>
-        <div className="">
-          <Button onClick={() => setIsShowModalAddTicket(false)}>Hủy</Button>,
-          <Button onClick={handleAddComboTicket}>Lưu</Button>
         </div>
       </div>
   )

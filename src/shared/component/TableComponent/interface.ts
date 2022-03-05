@@ -25,6 +25,7 @@ export interface IBEPaginationTable extends TableProps<any> {
   onRowSelect?: (params: React.Key[]) => void;
   summaryKey?: string;
   onRowSelectDetail?: (params: React.Key[]) => void;
+  setCurrentId: React.Dispatch<React.SetStateAction<string>>
 }
 
 export const InitOption: OptionEntity = {

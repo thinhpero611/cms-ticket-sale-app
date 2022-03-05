@@ -14,6 +14,8 @@ export const getAllComboTicketAsync = (): AppThunk => async (
 export const createComboTicket = (newData: ComboTicketEntity): AppThunk => async (
     dispatch
 ) => {
-    const retrievedData = await api.comboTicket.createTask<ComboTicketEntity>(newData)
+    const documentData = await api.comboTicket.createTask<ComboTicketEntity>(newData)
+    //@ts-ignore
+    const retrievedData = await api.comboTicket.fetchOne<ComboTicketEntity>(documentData?.id)
     dispatch(comboTicketStore.actions.createComboTicket({ data: retrievedData}))
 }
