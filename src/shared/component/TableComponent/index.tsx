@@ -69,7 +69,7 @@ const TableComponent = ( props: IBEPaginationTable ) => {
       setState(prev => ({ ...prev, pagination}))
     }
   }
-  console.log(repository?.value)
+  // console.log(repository?.value)
   const handleChangePage = (
     newPagination: PaginationEntity,
     _filter?,
@@ -158,6 +158,7 @@ const TableComponent = ( props: IBEPaginationTable ) => {
         pagination={{ 
           ...props.pagination, 
           ...state.pagination, 
+          total: state.option?.filter?.status === 'all' ? dataSource?.length : state.pagination.total
         }}
         onChange={handleChangePage}
         columns={thisColumns}
