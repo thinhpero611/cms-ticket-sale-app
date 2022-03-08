@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react'
 import api from '../../../../core/firebase'
 import TicketEntity from '../../../../module/ticket/entity'
 import RangePickerComponent from '../../../../shared/component/DatePickerComponent'
+import firebase from "firebase/compat/app"
+import "firebase/compat/firestore"
 
 interface Iprops {
   currentId: string
@@ -11,7 +13,7 @@ interface Iprops {
 }
 
 const ChangeDateUsing: React.FC<Iprops> = ({ currentId, isEventTicket }) => {
-  const [ currentVal, setCurrentVal ] = useState<TicketEntity>()
+  const [ currentVal, setCurrentVal ] = useState<TicketEntity | firebase.firestore.DocumentData>()
   console.log('currentid :', currentId, currentVal)
 
   useEffect(() => {

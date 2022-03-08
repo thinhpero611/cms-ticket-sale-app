@@ -1,0 +1,48 @@
+@import "../variable";
+
+.btn-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 181px;
+    height: 48px;
+
+    /* Yellow/1 */
+
+    border: 1px solid $color__main;
+    box-sizing: border-box;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    span {
+        position: absolute;
+        width: 133px;
+        height: 26px;
+        left: 24px;
+        top: 11px;
+
+        /* 18 bold */
+
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 26px;
+        /* identical to box height, or 144% */
+
+        display: flex;
+        align-items: center;
+
+        /* Yellow/1 */
+
+        color: $color__main;
+
+        /* Inside auto layout */
+
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        margin: 0px 10px;
+    }
+}

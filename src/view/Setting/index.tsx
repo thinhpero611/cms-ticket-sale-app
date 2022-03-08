@@ -117,7 +117,7 @@ const SettingComponent = () => {
           <Button onClick={handleAddComboTicket}>Lưu</Button>
         ]}
       >
-        <AddComboTicket setComboTicket={setComboTicket} />
+        <AddComboTicket  comboTicket={comboTicket} setComboTicket={setComboTicket} />
       </Modal>
       <Modal title="Cập nhập thông gói vé" key="2"
         visible={isShowModalUpdateTicket}

@@ -1,6 +1,6 @@
 // MAIN COLOR
-$color__main: #2F67BA;
-$color__second: #ff9911;
+$color__main: #FF993C;
+$color__second: #1d519e;
 $color__white: #ffffff;
 $color__black: #000000;
 
@@ -15,7 +15,7 @@ $color--background: #F9F6F4;
 $color--main-text: #1E0D03;
 
 // FONT FAMILY
-$main-font: "Montserrat Light";
+$main-font: "Montserrat";
 
 // FONT WEIGHT
 $font-weight-normal: 400;
@@ -24,11 +24,11 @@ $font-weight-semi-bold: 600;
 $font-weight-bold: 700;
 
 // FONT SIZE
-$fs-0: 1.2rem;
-$fs-1: 1.4rem;
-$fs-2: 1.6rem;
-$fs-3: 1.8rem;
-$fs-4: 2.0rem;
+$fs-0: 14px;
+$fs-1: 16px;
+$fs-2: 18px;
+$fs-3: 24px;
+$fs-4: 36px;
 $fs-5: 2.4rem;
 
 //-----------------------------
@@ -57,7 +57,7 @@ $color-scroll-bar: #C8C8C8;
 //|       MAIN COMPONENT      |
 //-----------------------------
 //--1. MainTitleComponent----
-$color--main-title: #0A4874CC;
+$color--main-title: #1E0D03;
 
 //--2. Breadcrumb----
 $color-breadcumb-text: #0f1c4991;

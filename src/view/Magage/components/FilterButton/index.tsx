@@ -28,7 +28,7 @@ const FilterButton: React.FC<Iprops> = ({ getFilterProps }) => {
       
   return (
     <>
-      <Button onClick={handleShowModal}><FiFilter /> &nbsp; Lọc vé</Button>
+      <Button onClick={handleShowModal}><FiFilter /> Lọc vé</Button>
       <Modal title="Lọc vé"  key="3"
         visible={isShowModal} 
         onOk={handleOk} 

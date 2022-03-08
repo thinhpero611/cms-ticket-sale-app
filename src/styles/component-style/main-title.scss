@@ -1,10 +1,12 @@
 .main-title {
+    display: flex;
+    align-items: center;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 36px;
+    line-height: 54px;
     /* Blue 7 */
     color: $color--main-title;
     margin: 0;
-    line-height: 3rem;
   }
   
 .secondary-title {

@@ -39,7 +39,7 @@ export const InitOption: OptionEntity = {
 };
 
 export const InitPagination: PaginationEntity = {
-    pageSize: 12,
+    pageSize: 10,
     total: 120,
     showSizeChanger: false
 };

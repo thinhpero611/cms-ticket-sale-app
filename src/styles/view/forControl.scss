@@ -1,0 +1,33 @@
+@import "../variable";
+@import "../mixin";
+
+
+
+.forControl-component {
+    background: $color--background;
+    .col-main {
+        position: absolute;
+        width: 1097px;
+        height: 963px;
+        left: 0;
+        top: 0;
+        
+        background: #FFFFFF;
+        border-radius: 24px;
+    }
+    
+    .col-second {
+        position: absolute;
+        width: 446px;
+        height: 963px;
+        top: 0;
+        right: 0;
+        
+        background: #FFFFFF;
+        border-radius: 24px;
+    }
+}
+
+.all-page-component .right-page-component .main-comopent {
+    background: $color--background;
+}

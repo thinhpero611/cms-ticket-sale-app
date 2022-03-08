@@ -1,13 +1,14 @@
 @import "./variable";
 @import "./mixin";
 
-@font-face {
-  font-family: "Montserrat";
-  font-weight: normal;
-  font-display: swap;
-  src: local("Montserrat Light"), local("Montserrat-Light"),
-    url("..\\shared\\assets\\font\\montserrat\\Montserrat-Light.ttf") format("truetype"); // use escape character
-}
+// @font-face {
+//   font-family: "Montserrat";
+//   font-weight: normal;
+//   font-display: swap;
+//   src: local("Montserrat Light"), local("Montserrat-Light"),
+//     url("..\\shared\\assets\\font\\montserrat\\Montserrat-Light.ttf") format("truetype"); // use escape character
+// }
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
 html {
   font-size:5.5px;

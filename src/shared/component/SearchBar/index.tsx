@@ -37,7 +37,7 @@ const SearchComponent = (props: Iprops) => {
 
   return (
     <>
-      <div className={`"search-bar-wrapper" ${classNames}`}>
+      <div className={`search-bar-wrapper ${classNames}`}>
         <Input
           type="text"
           onChange={onChange}
@@ -46,8 +46,8 @@ const SearchComponent = (props: Iprops) => {
             defaultMessage: props?.placeholder,
           })}
         />
+        <Icon.Search className="icon-search"/>
       </div>
-      <Icon.Search className="icon-search"/>
     </>
   );
 };

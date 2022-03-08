@@ -10,8 +10,9 @@ const { Option } = Select
 
 interface Iprops {
   setComboTicket: React.Dispatch<React.SetStateAction<ComboTicketEntity>>
+  comboTicket: ComboTicketEntity
 }
-const AddComboTicket: React.FC<Iprops> = ({ setComboTicket }) => {
+const AddComboTicket: React.FC<Iprops> = ({ setComboTicket, comboTicket }) => {
  
   const [ price, setPirce ] = useState<number>(0)
   const [ comboPrice, setComboPrice ] = useState<number>(0)

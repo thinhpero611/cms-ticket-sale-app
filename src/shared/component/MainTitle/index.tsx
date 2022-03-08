@@ -9,7 +9,7 @@ interface IProps {
 const TitleComponent = (props: IProps) => {
   const className = props?.index == 2 ? 'secondary-title' : 'main-title';
   return (
-    <p className={`${className} ${props.className}`} style={props.style}>
+    <p className={`${className} ${props?.className ? props.className : ''}`} style={props.style}>
       {props.title}
     </p>
   );

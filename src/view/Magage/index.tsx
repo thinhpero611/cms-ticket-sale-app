@@ -104,10 +104,10 @@ const ManageTicket = () => {
 
   return (
     <Content className="manage-component">
-      <MainTitle title="Danh sách vé" index={1} />
-      <Tabs defaultActiveKey="1" onChange={handleTabOnChange} >
+      <MainTitle className="manage-title" title="Danh sách vé" index={1} />
+      <ExportFile className="export-file-btn" title={"Xuất file (.csv)"} />
+      <Tabs defaultActiveKey="1" onChange={handleTabOnChange} className="main-tab">
         <TabPane tab="Gói gia đình" key="1" className="family-packs">
-          <ExportFile className={""} title={"Xuất file (.csv)"} />
           <TableComponent 
             apiServices={api.ticket.filterTicket}
             hasStt={true} 
@@ -121,14 +121,14 @@ const ManageTicket = () => {
           />
         </TabPane>
         <TabPane tab="Gói sự kiện" key="2" className="event-packs">
-          <ExportFile className={""} title={"Xuất file (.csv)"} />
           <TableComponent 
             apiServices={api.ticket.filterTicket}
             hasStt={true} 
-            pagination={{ total: ticket.results.filter((item) => item.event != null).length }}
+            pagination={{ total: ticket.results.filter((item) => item.event != null).length, pageSize: 10 }}
             dataSource={ticket.results.filter((item) => item.event != null)} 
             columns={column2s} 
             search={{ placeholder: 'Tìm bằng số vé'}}
+            filterButton={{ title: 'Lọc'}}
             loading={!ticket.status}
             setCurrentId={setCurrentId}
           />

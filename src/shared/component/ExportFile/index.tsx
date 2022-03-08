@@ -9,8 +9,8 @@ interface Iprops {
 }
 const ExportFile = ( props: Iprops) => {
   return (
-    <div className={`${props?.className}`}>
-        <Button onClick={props.onClickEvent}>{props?.title}</Button>
+    <div className={`btn-wrapper ${props?.className}`}>
+        <span onClick={props.onClickEvent}>{props?.title}</span>
     </div>
   )
 }

@@ -1,0 +1,60 @@
+@import "../variable";
+
+.search-bar-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 437px;
+    height: 48px;
+    .ant-input {
+        position: absolute;
+        width: 394px;
+        height: 28px;
+        left: 16px;
+        top: 10px;
+        border: none;
+
+        /* 16 italic */
+
+        font-family: Montserrat;
+        font-style: italic;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
+
+        /* Text */
+
+        color: #1E0D03;
+
+        opacity: 0.3;
+
+        /* Inside auto layout */
+
+        flex: none;
+        order: 0;
+        align-self: stretch;
+        flex-grow: 1;
+        margin: 0;
+    }
+
+    .ant-input:focus, .ant-input-focused {
+        box-shadow: none !important;
+    }
+
+    .ant-input:hover {
+        border-color: none;
+    }
+  
+    .icon-search {
+        position: absolute;
+        right: 0;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+    }
+
+}
+        

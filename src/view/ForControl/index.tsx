@@ -76,38 +76,44 @@ const ForControl = () => {
 
   return (
     <Content className="forControl-component">
-      <MainTitle index={1} title="Đối soát vé " />
-      <Tabs defaultActiveKey="1" onChange={handleChangeTabKey} className="table-in-tabs">
-        <TabPane key="1" tab="Goi gia dinh">
-          {state.isDoingForControl && (<ExportFile className={""} title={"Xuất file (.csv)"} />)}
-          {!state.isDoingForControl && (<EnableTicketButton className={""} title={"Chốt đối soát"} />)}
-          <TableComponent 
-            apiServices={api.ticket.filterTicketForControl}
-            hasStt={true}
-            columns={columns}
-            dataSource={tickets.results}
-            pagination={{ total: tickets.results.length}}
-            option={{ filter: {...state}}}
-            loading={!tickets.status}
-            search={{ placeholder: "Tìm bằng số vé"}}
-            /> 
-        </TabPane>
-        <TabPane key="2" tab="Goi su kien">
-          {state.isDoingForControl && (<ExportFile className={""} title={"Xuất file (.csv)"} />)}
-          {!state.isDoingForControl && (<EnableTicketButton className={""} title={"Chốt đối soát"} />)}
-          <TableComponent 
-            apiServices={api.ticket.filterTicketForControl}
-            hasStt={true}
-            columns={column2s}
-            dataSource={tickets.results.filter((item) => item.event !== null)}
-            pagination={{ total: tickets.results.filter((item) => item.event !== null).length}}
-            option={{ filter: {...state}}}
-            loading={!tickets.status}
-            search={{ placeholder: "Tìm bằng số vé"}}
-          /> 
-        </TabPane>
-      </Tabs>
-      <RightFilterComponent getFilter={setState} isEventTicket={tabKey == 2}/>
+      <div className="col-main">
+        <MainTitle index={1} title="Đối soát vé" />
+        <Tabs defaultActiveKey="1" onChange={handleChangeTabKey} className="table-in-tabs">
+          <TabPane key="1" tab="Goi gia dinh">
+            {state.isDoingForControl && (<ExportFile className={""} title={"Xuất file (.csv)"} />)}
+            {!state.isDoingForControl && (<EnableTicketButton className={""} title={"Chốt đối soát"} />)}
+            {/*@ts-ignore */}
+            <TableComponent 
+              apiServices={api.ticket.filterTicketForControl}
+              hasStt={true}
+              columns={columns}
+              dataSource={tickets.results}
+              pagination={{ total: tickets.results.length}}
+              option={{ filter: {...state}}}
+              loading={!tickets.status}
+              search={{ placeholder: "Tìm bằng số vé"}}
+              /> 
+          </TabPane>
+          <TabPane key="2" tab="Goi su kien">
+            {state.isDoingForControl && (<ExportFile className={""} title={"Xuất file (.csv)"} />)}
+            {!state.isDoingForControl && (<EnableTicketButton className={""} title={"Chốt đối soát"} />)}
+                      {/*@ts-ignore */}
+            <TableComponent 
+              apiServices={api.ticket.filterTicketForControl}
+              hasStt={true}
+              columns={column2s}
+              dataSource={tickets.results.filter((item) => item.event !== null)}
+              pagination={{ total: tickets.results.filter((item) => item.event !== null).length}}
+              option={{ filter: {...state}}}
+              loading={!tickets.status}
+              search={{ placeholder: "Tìm bằng số vé"}}
+              /> 
+          </TabPane>
+        </Tabs>
+      </div>
+      <div className="col-second">
+        <RightFilterComponent getFilter={setState} isEventTicket={tabKey == 2}/>
+      </div>
     </Content>
   )
 }
