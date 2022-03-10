@@ -30,6 +30,7 @@ const FilterButton: React.FC<Iprops> = ({ getFilterProps }) => {
     <>
       <Button onClick={handleShowModal}><FiFilter /> Lọc vé</Button>
       <Modal title="Lọc vé"  key="3"
+        className="modal-filter-ticket"
         visible={isShowModal} 
         onOk={handleOk} 
         onCancel={handleCancel} 

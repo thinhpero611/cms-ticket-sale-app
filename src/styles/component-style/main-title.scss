@@ -10,8 +10,11 @@
   }
   
 .secondary-title {
-    font-size: $fs-5;
-    color: white;
+    color: $color--main-title;
     font-weight: $font-weight-bold;
-    margin-top: 1rem;
+    line-height: 30px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+
 }

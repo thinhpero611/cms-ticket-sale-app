@@ -4,7 +4,8 @@ import dayjs from 'dayjs'
 // component
 import { Button, Table } from 'antd'
 import SearchComponent from '../SearchBar'
-// styles
+// icons
+import { GrCaretNext, GrCaretPrevious } from 'react-icons/gr'
 // types
 import { IBEPaginationTable } from './interface'
 import { PaginationEntity } from '../../../core/pagination'
@@ -106,6 +107,16 @@ const TableComponent = ( props: IBEPaginationTable ) => {
 
   const thisColumns = React.useMemo(() => {
     // xét từng column một
+      const columnTranslate = columns
+    // const columnTranslate = columns.map((item) => {
+    //   const key = item?.title || `common.${item?.dataIndex}`;
+    //   // ưu tiên nếu dev truyền vào title trước nha
+    //   const title = intl.formatMessage({
+    //     id: key,
+    //     defaultMessage: key,
+    //   });
+    //   return { ...item, title };
+    // });
 
     if (hasStt) {
       const hasSttColumn = {
@@ -122,10 +133,10 @@ const TableComponent = ( props: IBEPaginationTable ) => {
           return ((num - 1) * pageSize) +(index + 1);
         },
       };
-      return [hasSttColumn, ...columns];
+      return [hasSttColumn, ...columnTranslate];
     }
     //dịch mỗi thằng
-    return columns
+    return columnTranslate
   }, [hasStt, columns, state.pagination]);
 
   const onRow = ( record, rowIndex ) => (
@@ -162,7 +173,9 @@ const TableComponent = ( props: IBEPaginationTable ) => {
         }
         pagination={{ 
           ...state.pagination, 
-          total: state.option?.filter?.status === 'all' || state.option?.filter?.isDoingForControl === 'all' ? dataSource?.length : state.pagination.total
+          total: state.option?.filter?.status === 'all' || state.option?.filter?.isDoingForControl === 'all' ? dataSource?.length : state.pagination.total,
+          nextIcon: <GrCaretNext />,
+          prevIcon: <GrCaretPrevious />
         }}
         onChange={handleChangePage}
         columns={thisColumns}

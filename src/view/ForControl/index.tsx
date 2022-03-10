@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RootState } from '../../module'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button, Tabs } from 'antd'
 import { BsDash } from 'react-icons/bs'
 import { Content } from 'antd/lib/layout/layout'
@@ -12,6 +12,10 @@ import { IFilterTicketProps } from '../Magage/components/FilterModalComponent'
 import api from '../../core/firebase'
 import ExportFile from '../../shared/component/ExportFile'
 import EnableTicketButton from '../../shared/component/EnableTicketButton'
+import data2 from '../Magage/data2'
+import DashComponent from '../../shared/component/DashComponent'
+import { getAllComboTicketAsync } from '../../module/comboTicket/repository'
+import { getAllTicketAsync } from '../../module/ticket/repository'
 
 const { TabPane } = Tabs
 
@@ -19,7 +23,13 @@ const ForControl = () => {
   const tickets = useSelector((state: RootState) => state.ticket)
   const [ tabKey, setTabKey ] = useState(1)
   const [ state, setState ] = useState<IFilterTicketProps>({ isDoingForControl: 'all'})
-  console.log(state)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllTicketAsync())
+  }, [dispatch])
+
+  console.log(tickets.results)
   const columns = [
     {
       title: 'Booking code',
@@ -29,7 +39,8 @@ const ForControl = () => {
     {
       title: 'Số vé',
       dataIndex: 'ticketNumber',
-      key: 'ticketNumber'
+      key: 'ticketNumber',
+      render: (record) => record ? record : <DashComponent />
     },
   
     {
@@ -41,16 +52,13 @@ const ForControl = () => {
       title: 'Tên loại vé',
       dataIndex: 'type',
       key: 'type',
-      render: (text, record, index) => (<span>{text}</span>)
+      render: (text, record, index) => text ? (<span>{text}</span>) : <DashComponent />
     },
     {
       title: 'Cổng check-in',
       dataIndex: 'gate',
       key: 'gate',
-      render: (record) => {
-        if (record) return record
-        return <BsDash />
-      }
+      render: (record) => record ? record : <DashComponent />
     },
     {
       title: '',
@@ -58,12 +66,12 @@ const ForControl = () => {
       key: 'isDoingForControlTicket',
       render: (text, record, index) => {
         if (!text) return (<Text italic>Chưa đối soát</Text>)
-        if (text) return (<Text type="danger" italic>Da đối soát</Text>)
+        if (text) return (<Text type="danger" italic>Đã đối soát</Text>)
       
       }
     }
   ]
-  const column2s = [...columns]
+  const column2s = [...columns.slice(1, columns.length)]
   column2s.splice(1, 0,  { 
     title: 'Tên sự kiện', 
     dataIndex: 'event', 
@@ -76,28 +84,26 @@ const ForControl = () => {
 
   return (
     <Content className="forControl-component">
-      <div className="col-main">
+      <div className="column-3">
         <MainTitle index={1} title="Đối soát vé" />
-        <Tabs defaultActiveKey="1" onChange={handleChangeTabKey} className="table-in-tabs">
-          <TabPane key="1" tab="Goi gia dinh">
-            {state.isDoingForControl && (<ExportFile className={""} title={"Xuất file (.csv)"} />)}
-            {!state.isDoingForControl && (<EnableTicketButton className={""} title={"Chốt đối soát"} />)}
+        {state.isDoingForControl && state.isDoingForControl !== 'all' && (<ExportFile className={"export-file-btn"} title={"Xuất file (.csv)"} />)}
+        {!state.isDoingForControl && (<EnableTicketButton className={"enable-ticket-btn"} title={"Chốt đối soát"} />)}
+        <Tabs defaultActiveKey="1" onChange={handleChangeTabKey} className="main-tab">
+          <TabPane key="1" tab="Gói gia đình">
             {/*@ts-ignore */}
             <TableComponent 
               apiServices={api.ticket.filterTicketForControl}
               hasStt={true}
               columns={columns}
               dataSource={tickets.results}
-              pagination={{ total: tickets.results.length}}
+              pagination={{ total: tickets.results.length, pageSize: 9 }}
               option={{ filter: {...state}}}
               loading={!tickets.status}
               search={{ placeholder: "Tìm bằng số vé"}}
               /> 
           </TabPane>
-          <TabPane key="2" tab="Goi su kien">
-            {state.isDoingForControl && (<ExportFile className={""} title={"Xuất file (.csv)"} />)}
-            {!state.isDoingForControl && (<EnableTicketButton className={""} title={"Chốt đối soát"} />)}
-                      {/*@ts-ignore */}
+          <TabPane key="2" tab="Gói sự kiện">
+            {/*@ts-ignore */}
             <TableComponent 
               apiServices={api.ticket.filterTicketForControl}
               hasStt={true}
@@ -111,7 +117,7 @@ const ForControl = () => {
           </TabPane>
         </Tabs>
       </div>
-      <div className="col-second">
+      <div className="column-1">
         <RightFilterComponent getFilter={setState} isEventTicket={tabKey == 2}/>
       </div>
     </Content>

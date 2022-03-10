@@ -13,6 +13,7 @@ interface Iprops {
 }
 
 const { Option } = Select
+
 const RightFilterComponent = ( props: Iprops ) => {
   // console.log(state)
   const onRadioGroupChange = (e) => {
@@ -33,14 +34,18 @@ const RightFilterComponent = ( props: Iprops ) => {
   
   return (
    <div className="right-filter-component">
-      <MainTitle index={1} title="Lọc vé" />
+      <MainTitle index={2} title="Lọc vé" />
       {props.isEventTicket && (
-        <Select onChange={hanldeOnChangeSelect} className="filter__event">
-          <Option value="Will AI invade human civilization">Will AI invade human civilization</Option>
-        </Select>
+        <div className="filter__event">
+          <Select onChange={hanldeOnChangeSelect}>
+            <Option value="Will AI invade human civilization">Will AI invade human civilization</Option>
+          </Select>
+        </div>
       )}
       <div className="filter__status-ticket">
-        <Text>Tình trạng đối soát vé</Text>
+        <div className="typography">
+          <Text>Tình trạng đối soát</Text>
+        </div>
         <Radio.Group onChange={onRadioGroupChange}>
           <Radio value="all">Tất cả</Radio>
           <Radio value={status.DOING_FORCONTROL}>Đã đối soát</Radio>
@@ -48,13 +53,17 @@ const RightFilterComponent = ( props: Iprops ) => {
         </Radio.Group>
       </div>
       <div className="filter__type-ticket">
-        <Text type="danger">Loại vé</Text>
-        <Text>Vé Cổng</Text>
+        <div className="typography">
+          <Text>Loại vé</Text>
+        </div>
+        <div className="data-entry">
+          <Text>Vé Cổng</Text>
+        </div>
       </div>
-      <div className="filter__dateTicket">
+      <div className="filter__date-ticket">
         <DateRangePicker />
       </div>
-      <Button onClick={hanldeFilterTicket} className="filter__activated-button">Loc</Button>
+      <Button onClick={hanldeFilterTicket} className="filter__activated-button">Lọc</Button>
    </div>
   )
 }

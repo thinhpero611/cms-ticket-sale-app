@@ -1,26 +1,40 @@
-import React from "react";
-import { DatePicker } from "antd";
+import React , { useState } from "react";
+import { DatePicker, DatePickerProps } from "antd";
 import "./style.scss";
-import { FiCalendar } from 'react-icons/fi'
+import { PickerDateProps } from "antd/lib/date-picker/generatePicker";
+import { Moment } from "moment";
+import { FiCalendar } from "react-icons/fi";
 
-interface IRangerPicker {
+interface IRangerPicker extends PickerDateProps<Moment> {
   value?: any;
   onChange?: any;
   defaultValue?: any;
+  className?: string;
+  placeholder?: string;
 }
 
 const DatePickerComponent = (props: IRangerPicker) => {
+  const [ isPicked, setIsPicked ] = useState(false)
   return (
     <DatePicker
+      placeholder={`${props.placeholder ? props.placeholder : "dd/mm/yy"}`}
+      className={`${props?.className ? props.className : ''} ${isPicked ? 'date-has-picked' : ''}`}
       defaultValue={props?.defaultValue}
-      onChange={(value) => props?.onChange(value)}
+      onChange={(value) => setIsPicked(value !== undefined)}
       value={props?.value}
       picker="date"
-      format="DD-MM-YYYY"
+      format="DD/MM/YYYY"
       // locale={locale}
-      suffixIcon={<FiCalendar size="27" className="icon-feather" />}
+      suffixIcon={props.suffixIcon || <FiCalendar size="27" className="icon-feather" />}
+      onMouseLeave={(value) => setIsPicked(value.currentTarget.getElementsByTagName('input')[0].value !== '')} // point to input tag
     />
   );
 };
 
 export default React.memo(DatePickerComponent);
+
+
+// function useState(arg0: boolean): [any, any] {
+//   throw new Error("Function not implemented.");
+// }
+

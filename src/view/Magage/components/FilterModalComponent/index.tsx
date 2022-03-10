@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 // component
 import { Checkbox, Button, Radio } from 'antd';
-import RangePickerComponent from '../../../../shared/component/DatePickerComponent';
+import RangePickerComponent from '../../../../shared/component/DateRangePickerComponent';
 import { status } from '../../../../module/ticket/constant';
 import { PaginationEntity } from '../../../../core/pagination';
 import { OptionEntity } from '../../../../core/table';
@@ -69,13 +69,12 @@ const FilterComponent = ( props: IProps) => {
     <>
       <div className="modal-filter-ticket-component">
         <div className="modal-filter__ticket-date">
-          <p>Từ ngày</p>
-            <RangePickerComponent />
-          <p>Dến ngày</p>
             <RangePickerComponent />
         </div>
-        <div className="modal-filter__status-ticket">
-          <p>Tình trạng sử dụng</p>
+        <div className="modal-filter__ticket-status">
+          <div className="typography">
+            <p>Tình trạng sử dụng</p>
+          </div>
           <Radio.Group onChange={handleRadioGroupChange}>
             <Radio defaultChecked value={status.ALL}>Tất cả</Radio>
             <Radio value={status.IN_USE}>Đã sử dụng</Radio>
@@ -84,7 +83,9 @@ const FilterComponent = ( props: IProps) => {
           </Radio.Group>
         </div>
         <div className="modal-filter__ticket-gates">
-          <p>Cổng Check-In</p>
+          <div className="typography">
+            <p>Cổng Check-In</p>
+          </div>
           <Checkbox onChange={onCheckAllChange} checked={checkAll}>
           Check all
           </Checkbox>

@@ -1,0 +1,184 @@
+ @import "../variable";
+ @import "../mixin";
+ 
+ /* căn chỉnh vị trí bản table chính */
+ .ant-table-wrapper.main-table {
+    /* đi tới thẻ tag chứa pagination */
+    .ant-spin-nested-loading, .ant-spin-container {
+        height: 716px;
+        
+        .ant-table-pagination.ant-pagination {
+            position: absolute;
+            left: 550px;
+            bottom: 0;
+            
+
+            .ant-pagination-item:focus-visible, .ant-pagination-item:hover {
+                transition: none;
+                color: $color__main;
+            }
+
+            .ant-pagination-item {
+                border: #fff;
+                border-radius: 4px;
+            }
+
+            .ant-pagination-item-active {
+                color: $color__main;
+                border: 1px solid $color__main;
+            }
+        }
+
+        /* tùy chỉnh màu pagination prev, next tương ứng với trạng thái disabled*/
+        .ant-pagination-prev , .ant-pagination-next {
+            svg polygon {
+                stroke: $color__main;
+                fill: $color__main;
+            }
+            border: #fff;
+            color: $color__main;
+        }
+        .ant-pagination-disabled , .ant-pagination-disabled:hover , .ant-pagination-disabled:focus-visible {
+            svg polygon {
+                stroke: #A5A8B1;
+                fill: #A5A8B1;
+            }
+            border-color: #d9d9d9;
+            cursor: not-allowed;
+        }
+        
+        /* default setting pagination next, prev button with anchor tag */
+        // .ant-pagination-prev .ant-pagination-item-link, .ant-pagination-next .ant-pagination-item-link {
+        //     border: #fff;
+        //     color: $color__main;
+        // }
+        // .ant-pagination-disabled .ant-pagination-item-link, .ant-pagination-disabled:hover .ant-pagination-item-link, .ant-pagination-disabled:focus-visible .ant-pagination-item-link {
+        //     color: rgba(0, 0, 0, 0.25);
+        //     border-color: #d9d9d9;
+        //     cursor: not-allowed;
+        // }
+
+    }
+
+    .ant-spin-nested-loading .ant-spin-container .ant-table 
+    .ant-table-container .ant-table-content table {
+        position: relative;
+        border-collapse: none;
+        border-spacing: none;
+        border-radius: 8px 8px 0px 0px;
+        thead {
+            // position: absolute;
+            width: 1511px;
+            height: 48px;
+            left: 0px;
+            top: 0px;
+            /* Grey / 2 */
+
+            background: #F1F4F8;
+            border-radius: 8px 8px 0px 0px;
+
+            /* Inside auto layout */
+
+            flex: none;
+            order: 0;
+            align-self: stretch;
+            flex-grow: 0;
+            margin: 0px 0px;
+
+            tr th {
+                border-bottom: none;
+                background-color: #F1F4F8;
+                font-size: 16px;
+                font-weight: $font-weight-semi-bold;
+                align-items: center;
+                color: $color--main-text;
+            }
+        }
+        
+        /* tắt đường phân cách tên title của từng column trong header của bảng */
+        .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+            content: none;
+        }
+
+        .ant-table-tbody > tr > td.ant-table-cell .update-combo-ticket {
+            cursor: pointer;    
+        }
+
+        .ant-table-tbody > tr > td.ant-table-cell.update-ticket svg {
+            cursor: pointer;    
+        }
+        .ant-table-tbody > tr > td {
+            border-bottom: none;
+            font-size: 14px;
+            font-weight: $font-weight-medium;
+            color: $color--main-text;
+            opacity: 0.8;
+
+            .my-tag {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding: 8px 12px;
+                width: 120px;
+                height: 31px;
+                /* Grey/5 */
+                
+                background: #EAF1F8;
+                border: 1px solid #919DBA;
+                border-radius: 4px;
+                svg {
+                    width: 8px;
+                    height: 8px;
+                    margin: 0 8px 0 0;
+                    path {
+                        stroke: #919DBA;
+                        stroke-width: 8px;
+                    }
+                }
+                span {
+                    color: #919DBA;
+                    font-weight: $font-weight-medium;
+                    font-size: 12px;
+                    line-height: 15px;
+                }
+            }
+            .my-tag.ant-green-tag {
+                width: 135px;
+                background: #DEF7E0;
+                border-color: #03AC00;
+                svg path {
+                    stroke: #03AC00;
+                }
+                span {
+                    color: #03AC00;
+                }
+            }
+
+            .my-tag.ant-red-tag {
+                width: 100px;
+                background: #F8EBE8;
+                border-color: #FD5959;
+                svg path {
+                    stroke: #FD5959;
+                }
+                span {
+                    color: #FD5959;
+                }
+            }
+        }
+        
+        /* tạo bảng sọc vằn (zebra striped table) */
+        tbody > tr:nth-child(even) {
+            background-color: #F1F4F8;
+        }
+
+    }
+    .ant-table-container table > thead > tr:first-child th:last-child {
+        border-top-right-radius: 8px;
+    }
+    
+    .ant-table-container table > thead > tr:first-child th:first-child {
+        border-top-left-radius: 8px;
+    }
+}

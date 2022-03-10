@@ -9,7 +9,7 @@ interface Iprops extends TimePickerProps {
 const TimePickerComponent = ( props: Iprops ) => {
 
   return (
-    <div className={`time-picker-wrapper ${props.className}`}>
+    <div className={`time-picker-wrapper ${props.className ? props.className : ''}`}>
         <TimePicker 
             value={props?.defaultValue}
             defaultValue={props?.defaultValue}

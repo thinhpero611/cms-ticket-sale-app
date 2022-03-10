@@ -1,16 +1,46 @@
+import { status } from "../../module/ticket/constant"
+
 const data2: {[propName: string]: string | number}[] = []
+const data1: {[propName: string]: string | number}[] = []
+const data3: {[propName: string]: string | number}[] = []
 // set up dummy data
 for (let i = 0; i < 120; i++) {
   data2.push({
-    key: i + 1,
-    stt: i + 1,
     bookingCode: '123942342',
+    ticketNumber: '99996666',
     event: 'Will AI invade human civiliztion (~.~)',
     ticket: '1234535',
-    status: 'chua su dung',
+    status: status.IN_USE,
     useDate: '12/02/21',
     outDate: '12/12/2022',
-    gate: 'Cong 1'
+    isDoingForControlTicket: status.DOING_FORCONTROL,
+    gate: 'Cổng 1'
+  })
+}
+for (let i = 0; i < 120; i++) {
+  data3.push({
+    bookingCode: '123942342',
+    ticketNumber: '99996666',
+    event: 'Will AI invade human civiliztion (~.~)',
+    ticket: '1234535',
+    status: status.NOT_USE,
+    useDate: '12/02/21',
+    outDate: '12/12/2022',
+    isDoingForControlTicket: status.NOT_DOING_FORCONTROL,
+    gate: 'Cổng 1'
+  })
+}
+for (let i = 0; i < 120; i++) {
+  data1.push({
+    bookingCode: '123942342',
+    ticketNumber: '99996666',
+    event: '',
+    ticket: '1234535',
+    status: status.EXPIRED,
+    useDate: '12/02/21',
+    outDate: '12/12/2022',
+    isDoingForControlTicket: status.DOING_FORCONTROL,
+    gate: 'Cổng 1'
   })
 }
 
@@ -37,7 +67,25 @@ data2.unshift({
   gate: ''
 }
 )
-export default data2
+
+
+function shuffleArray(array) {
+  let curId = array.length;
+  // There remain elements to shuffle
+  while (0 !== curId) {
+    // Pick a remaining element
+    let randId = Math.floor(Math.random() * curId);
+    curId -= 1;
+    // Swap it with the current element.
+    let tmp = array[curId];
+    array[curId] = array[randId];
+    array[randId] = tmp;
+  }
+  return array;
+}
+
+
+export default shuffleArray([...data1, ...data2, ...data3 ])
 
 // for (let i = 0; i < 20; i++) {
 //   api.createTask({

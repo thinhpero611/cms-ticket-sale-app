@@ -1,0 +1,258 @@
+@import "../variable";
+@import "../mixin";
+@import "./manage.scss";
+// .main-component {
+// }
+$grey-4: #A5A8B1;
+// @include bold-24() {
+//     font-style: normal;
+//     font-weight: $font-weight-bold;
+//     font-size: $fs-3;
+//     line-height: 30px;
+//     display: flex;
+//     align-items: center;
+//     color: $color--main-text;
+// }
+
+// @include semibold-16() {
+//     font-style: normal;
+//     font-weight: $font-weight-semi-bold;
+//     font-size: $fs-1;
+//     line-height: 26px;
+//     display: flex;
+//     align-items: center;
+//     color: $color--main-text;;
+//     opacity: 0.7;
+// }
+
+.setting-component {
+    background: $color__white;
+    width: 1567px;
+    height: 963px;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    .main-title.title-in-setting-router {
+        position: absolute;
+        top: 24px;
+        left: 24px;
+        /* 36 bold */
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 36px;
+        line-height: 54px;
+        /* identical to box height, or 150% */
+
+        display: flex;
+        align-items: center;
+
+        /* Text */
+
+        color: $color--main-text;
+    }
+
+    button.export-file-btn, button.add-combo-ticket-btn {
+        position: absolute;
+        top: 110px;
+        right: 220px;
+        padding: 11px 24px;
+        width: 181px;
+        height: 48px;
+        z-index: 20;
+        // cursor: pointer;
+        
+    }
+
+    /* override css property */
+    button.add-combo-ticket-btn {
+        right: 32px;
+        width: 164px;
+        background: $color__main;
+        span {
+            color: $color__white;
+        }
+        &:hover {   
+            opacity: 0.8;
+        }
+    }
+
+
+    .card-main-table {
+        position: absolute;
+        top: 110px;
+        left: 24px;
+        width: 1516px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .search-in-table {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 446px;
+            height: 48px;
+
+            .search-bar-wrapper {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 10px 16px;
+                width: 446px;
+                height: 48px;
+                background: #F7F7F8;
+                border-radius: 8px;
+
+                .ant-input {
+                    background: #F7F7F8;
+                    width: 320px;
+                    height: 28px;
+                    margin: 0px 16px; 
+                }
+
+                .icon-search {
+                    position: absolute;
+                    top: 10px;
+                    right: 14px;
+                }
+            }
+        }
+
+        .ant-table-wrapper.main-table {
+            position: absolute;
+            top: 72px;
+            left: 0;
+            width: 1516px;
+
+            .ant-spin-nested-loading, .ant-spin-container {
+                height: 781px;
+            }
+        }
+    }
+}
+
+.ant-modal.my-modal-item .ant-modal-content {
+    width: 758px;
+    height: 628px;
+    border-radius: 24px;
+
+    .ant-modal-header, .ant-modal-footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: $color__white;
+        border-radius: 24px;
+    }
+
+    button.ant-modal-close {
+        display: none;
+    }
+
+    .ant-modal-title {
+        // position: absolute;
+        // top: 24px;
+        // left: 302px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include bold-24();
+    }
+
+    .ant-modal-body {
+        position: absolute;
+        left: 32px;
+        top: 81px;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        
+        div.combo-ticket__add-name, div.update-combo__name {
+            display: flex;
+            justify-content: center;
+
+            >div {
+                margin: 0 80px 0 0;
+            }
+            div span.ant-typography {
+                @include semibold-16();
+            }
+            div input.ant-input {
+                margin-bottom: 5px;
+                border: 1px solid #A5A8B1;
+                box-sizing: border-box;
+                border-radius: 8px;
+                @include semibold-16();
+                font-weight: $font-weight-medium;
+
+                &:focus {
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+
+    .ant-modal-footer {
+        position: absolute;
+        top: 548px;
+        padding: 0;
+        width: 100%;
+        button.ant-btn {
+            margin: 0 24px 0 0;
+        }
+
+        button.ant-btn:hover {
+            background: #FD5959;
+        }
+        
+        button.ant-btn:nth-child(2) {
+            background: $color__main;
+            span {
+                color: $color__white;
+            }
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+
+    }
+}
+
+/* căn chỉnh lại vị trí của hộp add name */
+.ant-modal.modal-add-combo-ticket .ant-modal-content .ant-modal-body 
+.add-combo-ticket-card div.combo-ticket__add-name div {
+    margin: 0 254px 0 0;
+    input.ant-input {
+        width: 367px;
+        height: 40px;
+    }
+}
+
+/* chỉnh sửa hộp modal light box trong tính năng cập nhập gói vé */
+.ant-modal.modal-update-combo-ticket .ant-modal-content 
+.ant-modal-body .update-combo-ticket-card {
+
+    div.update-combo__name {
+        div:nth-child(1) {
+            input.ant-input {
+                width: 245px;
+                height: 40px;
+            }
+        }
+
+        div:nth-child(2) {
+            
+            input.ant-input {
+                width: 367px;
+                height: 40px;
+            }
+        }
+
+    } 
+} 

@@ -69,16 +69,16 @@ const SettingComponent = () => {
       key: 'status',
       render: (text, record) => {
         if (text === true) 
-          return (<Tag color={"success"}><GoPrimitiveDot /> {status.COMBO_ACTIVE}</Tag>)
+          return (<div className="my-tag ant-green-tag" color={"success"}><GoPrimitiveDot /> <span>{status.COMBO_ACTIVE}</span></div>)
         else  
-          return (<Tag color="volcano"><GoPrimitiveDot /> {status.COMBO_OFF}</Tag>)
+          return (<div className="my-tag ant-red-tag"  style={{ width: '70px' }} color="volcano"><GoPrimitiveDot /> <span>{status.COMBO_OFF}</span></div>)
       }
     },
     {
       title: '',
       dataIndex: 'update',
       key: 'update',
-      render: (text, record) => (<Text key={record.id} type='danger' onClick={handleShowUpdateTicket}><FiEdit /> &nbsp; cập nhập</Text>)
+      render: (text, record) => (<Text className="update-combo-ticket" key={record.id} type='danger' onClick={handleShowUpdateTicket}><FiEdit /> &nbsp; cập nhập</Text>)
     }
   ]
 
@@ -104,11 +104,12 @@ const SettingComponent = () => {
   }
 
   return (
-    <Content className="setting-component">
-      <MainTitle index={1} title="Danh sách gói vé" />
-      <Button>Xuất file (.csv)</Button>
-      <Button onClick={hanleShowAddComboTicket}>Thêm gói vé</Button>
+    <div className="setting-component">
+      <MainTitle index={1} title="Danh sách gói vé" className="title-in-setting-router"/>
+      <Button className="export-file-btn" >Xuất file (.csv)</Button>
+      <Button className="add-combo-ticket-btn" onClick={hanleShowAddComboTicket}>Thêm gói vé</Button>
       <Modal title="Thêm gói vé" key="1"
+        className="modal-add-combo-ticket my-modal-item"
         visible={isShowModalAddTicket}
         onCancel={() => setIsShowModalAddTicket(false)}
         onOk={() => setIsShowModalAddTicket(false)}
@@ -120,6 +121,7 @@ const SettingComponent = () => {
         <AddComboTicket  comboTicket={comboTicket} setComboTicket={setComboTicket} />
       </Modal>
       <Modal title="Cập nhập thông gói vé" key="2"
+        className="modal-update-combo-ticket my-modal-item"
         visible={isShowModalUpdateTicket}
         onCancel={() => setIsShowModalUpdateTicket(false)}
         onOk={() => setIsShowModalUpdateTicket(false)}
@@ -138,7 +140,7 @@ const SettingComponent = () => {
         search={{ placeholder: "Tìm bằng mã gói vé"}}
         setCurrentId={setCurrentId}
       />
-    </Content>
+    </div>
   )
 }
 

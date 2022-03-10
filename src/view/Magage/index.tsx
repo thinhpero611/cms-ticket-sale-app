@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import data from './data2'
 // api
 import api from '../../core/firebase'
 // redux-store
@@ -18,6 +19,7 @@ import { BsDash } from 'react-icons/bs'
 import { BiDotsVerticalRounded } from 'react-icons/bi'
 // constants
 import { status } from '../../module/ticket/constant'
+import DashComponent from '../../shared/component/DashComponent'
 
 const { TabPane } = Tabs
 
@@ -46,34 +48,47 @@ const ManageTicket = () => {
     {
       title: 'Số vé',
       dataIndex: 'ticketNumber',
-      key: 'ticketNumber'
+      key: 'ticketNumber',
+      render: (record) => {
+        if (record) return record
+        return <DashComponent />
+      }
     },
     {
       title: 'Tình trạng sử dụng',
       dataIndex: 'status',
       key: 'status',
       render: (record) => {
-        let color= ''
         let message = ''
+        let className = ''
         switch(record) {
-          case status.IN_USE: color = ''; message = 'Đã sử dụng'; break
-          case status.EXPIRED: color = 'volcano'; message = 'Hết hạn'; break
-          case status.NOT_USE: color = 'success'; message = 'Chưa sử dụng'; break
+          case status.IN_USE:  message = 'Đã sử dụng'; className = ''; break
+          case status.EXPIRED: message = 'Hết hạn'; className = 'ant-red-tag'; break
+          case status.NOT_USE: message = 'Chưa sử dụng'; className = 'ant-green-tag'; break
+          default: return <DashComponent />
         }
         return (
-          <Tag color={color}><GoPrimitiveDot /> &nbsp; {message}</Tag>
+          <div className={className + " my-tag"} ><GoPrimitiveDot size="26px"/> <span>{message}</span></div>
         )
       }
     },
     {
       title: 'Ngày sử dụng',
       dataIndex: 'useDate',
-      key: 'useDate'
+      key: 'useDate',
+      render: (record) => {
+        if (record) return record
+        return <DashComponent />
+      }
     },
     {
       title: 'Ngày xuất vé',
       dataIndex: 'outDate',
-      key: 'outDate'
+      key: 'outDate',
+      render: (record) => {
+        if (record) return record
+        return <DashComponent />
+      }
     },
     {
       title: 'Cổng check-in',
@@ -81,15 +96,16 @@ const ManageTicket = () => {
       key: 'gate',
       render: (record) => {
         if (record) return record
-        return <BsDash />
+        return <DashComponent />
       }
     }, 
     {
       title: '',
       dataIndex: 'update',
       key: 'update',
+      className: 'update-ticket',
       render: (text, record) => {
-        if (record.status === status.NOT_USE) return (<div onClick={handleShowChangeDateModal}><BiDotsVerticalRounded /></div>)
+        if (record.status === status.NOT_USE) return (<div onClick={handleShowChangeDateModal}><BiDotsVerticalRounded size="24px" /></div>)
       }
     }
   ]
@@ -101,7 +117,6 @@ const ManageTicket = () => {
   const handleShowChangeDateModal = () => {
     setIsShowModal(true)
   }
-
   return (
     <Content className="manage-component">
       <MainTitle className="manage-title" title="Danh sách vé" index={1} />
@@ -111,8 +126,8 @@ const ManageTicket = () => {
           <TableComponent 
             apiServices={api.ticket.filterTicket}
             hasStt={true} 
-            pagination={{ total: ticket.results.length }}
-            dataSource={ticket.results} 
+            pagination={{ total: ticket.results.length, pageSize: 9 }}
+            dataSource={ ticket.results} 
             columns={columns} 
             search={{ placeholder: 'Tìm bằng số vé'}}
             filterButton={{ title: 'Lọc'}}
@@ -124,8 +139,8 @@ const ManageTicket = () => {
           <TableComponent 
             apiServices={api.ticket.filterTicket}
             hasStt={true} 
-            pagination={{ total: ticket.results.filter((item) => item.event != null).length, pageSize: 10 }}
-            dataSource={ticket.results.filter((item) => item.event != null)} 
+            pagination={{ total: ticket.results.filter((item) => item.event != '').length, pageSize: 9}}
+            dataSource={data.filter((item) => item.event != '')} 
             columns={column2s} 
             search={{ placeholder: 'Tìm bằng số vé'}}
             filterButton={{ title: 'Lọc'}}
@@ -137,6 +152,7 @@ const ManageTicket = () => {
       <Modal 
         key="4"
         title="Đổi ngày sử dụng vé"
+        className="modal-update-ticket"
         visible={isShowModal}
         onCancel={() => setIsShowModal(false)}
         onOk={() => setIsShowModal(false)}

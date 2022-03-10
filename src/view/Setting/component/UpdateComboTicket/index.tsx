@@ -15,9 +15,11 @@ const UpdateComboTicket = ({ currentId }) => {
   const [ num2, setNum2 ] = useState<number>(0)
   const [ num3, setNum3 ] = useState<number>(0)
   
+  console.log('value',currentVal) 
   useEffect(() => {
     api.comboTicket.fetchOne<ComboTicketEntity>(currentId).then((data) => setCurrentVal(data))
   }, [currentId])
+  
   const handleCheckboxChange = (list) => {
     console.log(list)
   }
@@ -25,19 +27,20 @@ const UpdateComboTicket = ({ currentId }) => {
   const handleSelectChange = (value) => {
     console.log(value)
   }
+
   return (
     <div className="update-combo-ticket-card">
-      <div className="update-combo__event">
+      <div className="update-combo__name">
         <div className="event-code">
           <Text>Mã sự kiện<sup style={{color: 'red'}}>*</sup></Text>
           {/*field cua ComboTicketEntity khac field tren firebase*/}
           {/*@ts-ignore*/}
-          <Input placeholder="" value={currentVal?.code} onChange={(value) => console.log(value)} />
+          <Input placeholder={currentVal?.code} onChange={(value) => console.log(value)} />
         </div>
         <div className="event-name">
           <Text>Tên sự kiện</Text>
           {/*@ts-ignore*/}
-          <Input placeholder="" value={currentVal?.packName} />
+          <Input placeholder={currentVal?.packName} />
         </div>
       </div>
       <div className="update-combo__date-range-picker">

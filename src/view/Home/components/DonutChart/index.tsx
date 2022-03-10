@@ -49,7 +49,7 @@ const DonutChart = ({ data, width, height, color: colorIn }: IProps) => {
   return ( 
     <div className="donut-chart-inner">
       {/*@ts-ignore */}
-      <Pie {...config} />;
+      <Pie {...config} />
     </div>
   )
 }

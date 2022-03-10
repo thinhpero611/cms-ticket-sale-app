@@ -34,15 +34,17 @@ const AddComboTicket: React.FC<Iprops> = ({ setComboTicket, comboTicket }) => {
   }
 
   return (
-      <div className="add-combo-ticker-card">
-        <div className="combo-ticker__add-name">
-          <Text>Tên gói vé<sup style={{color: 'red'}}>*</sup></Text>
-          <Input onChange={(e) => setComboTicket(prev => ({ ...prev, ticketPackName: e.target.value}))} placeholder="Nhập tên gói vé" />
+      <div className="add-combo-ticket-card">
+        <div className="combo-ticket__add-name">
+          <div>
+            <Text>Tên gói vé<sup style={{color: 'red'}}>*</sup></Text>
+            <Input onChange={(e) => setComboTicket(prev => ({ ...prev, ticketPackName: e.target.value}))} placeholder="Nhập tên gói vé" />
+          </div>
         </div>
-        <div className="combo-ticker__date-range-picker">
+        <div className="combo-ticket__date-range-picker">
           <DateRangePicker hasTimePicker={true}  />
         </div>
-        <div className="combo-ticker__price">
+        <div className="combo-ticket__price">
           <Text>Giá vé áp dụng</Text>
           <Checkbox.Group onChange={handleCheckboxChange}>
             <Checkbox value={price}>Vé lẻ (vnđ/vé) với giá <InputNumberComponent handleChange={setPirce} placeholder='giá vé' width="150px" /> / <span>vé</span></Checkbox>
@@ -53,7 +55,7 @@ const AddComboTicket: React.FC<Iprops> = ({ setComboTicket, comboTicket }) => {
             </Checkbox>
           </Checkbox.Group>
         </div>
-        <div className="combo-ticker__status">
+        <div className="combo-ticket__status">
           <Text>Tình trạng</Text>
           <Select defaultValue={status.COMBO_ACTIVE} onChange={handleSelectChange}> 
           <Option value={status.COMBO_ACTIVE}>Đang áp dụng</Option>
