@@ -7,6 +7,8 @@ import DatePicker from './components/Calendar';
 // styles
 import { Typography} from 'antd'
 import { useDispatch } from 'react-redux';
+import DatePickerComponent from '../../shared/component/DatePickerComponent';
+import moment from 'moment';
 
 const { Title } = Typography
 
@@ -57,13 +59,12 @@ const Home = () => {
 
   return (
     <Content className="home-component">
-      
       <Title level={1} className="main-title">Thống kê</Title>
       <div className="chart">
         <div className="label">
           <h2>Doanh thu</h2>
         </div>
-        <DatePicker />
+        <DatePickerComponent className="calendar" defaultValue={moment('22-02-2022', 'dd-mm-yyyy')} format="MMMM, YYYY"/>
         <Area {...config} />
        </div>
       <div className="revenue"> 
@@ -71,7 +72,7 @@ const Home = () => {
         <h1>525.142.000 </h1><span className="currency">đồng</span>
       </div>
       <div className="chart2">
-        <DatePicker />
+        <DatePickerComponent className="calendar" defaultValue={moment('22-02-2022', 'dd-mm-yyyy')} format="MMMM, YYYY"/>
         <div className="donut-chart">
           <h2>Gói Gia đình</h2>
           <DonutChart data={data1} color={COLORS} />

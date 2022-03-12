@@ -23,7 +23,7 @@ const DatePickerComponent = (props: IRangerPicker) => {
       onChange={(value) => setIsPicked(value !== undefined)}
       value={props?.value}
       picker="date"
-      format="DD/MM/YYYY"
+      format={props.format || "DD/MM/YYYY"}
       // locale={locale}
       suffixIcon={props.suffixIcon || <FiCalendar size="27" className="icon-feather" />}
       onMouseLeave={(value) => setIsPicked(value.currentTarget.getElementsByTagName('input')[0].value !== '')} // point to input tag

@@ -31,7 +31,7 @@ const ManageTicket = () => {
   const dispatch = useDispatch()
   
   useEffect(() => {
-    dispatch(getAllTicketAsync())
+    // dispatch(getAllTicketAsync())
   }, [dispatch])
 
   const handleTabOnChange = (key: string) => {
@@ -124,7 +124,7 @@ const ManageTicket = () => {
       <Tabs defaultActiveKey="1" onChange={handleTabOnChange} className="main-tab">
         <TabPane tab="Gói gia đình" key="1" className="family-packs">
           <TableComponent 
-            apiServices={api.ticket.filterTicket}
+            // apiServices={api.ticket.filterTicket}
             hasStt={true} 
             pagination={{ total: ticket.results.length, pageSize: 9 }}
             dataSource={ ticket.results} 
@@ -137,7 +137,7 @@ const ManageTicket = () => {
         </TabPane>
         <TabPane tab="Gói sự kiện" key="2" className="event-packs">
           <TableComponent 
-            apiServices={api.ticket.filterTicket}
+            // apiServices={api.ticket.filterTicket}
             hasStt={true} 
             pagination={{ total: ticket.results.filter((item) => item.event != '').length, pageSize: 9}}
             dataSource={data.filter((item) => item.event != '')} 

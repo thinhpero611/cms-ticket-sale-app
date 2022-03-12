@@ -9,15 +9,15 @@ interface Iprops extends TimePickerProps {
 const TimePickerComponent = ( props: Iprops ) => {
 
   return (
-    <div className={`time-picker-wrapper ${props.className ? props.className : ''}`}>
-        <TimePicker 
-            value={props?.defaultValue}
-            defaultValue={props?.defaultValue}
-            onChange={props?.onChange}
-            format={props?.format}
-            suffixIcon={<BiTime />}
-        />
-    </div>
+    <TimePicker 
+      className={props.className ? props.className : ''}
+      value={props?.defaultValue}
+      defaultValue={props?.defaultValue}
+      placeholder={props?.placeholder || 'hh:mm:ss'}
+      onChange={props?.onChange}
+      format={props?.format}
+      suffixIcon={<BiTime size="27" className="time-picker__icon" />}
+    />
   )
 }
 

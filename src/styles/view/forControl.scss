@@ -63,6 +63,13 @@
             cursor: pointer;
         }
 
+        .enable-ticket-btn {
+            background: $color__main;
+            span {
+                color: $color__white;
+            }
+        }
+        
         .main-tab.ant-tabs {
             position: absolute;
             top: 105px;
@@ -180,15 +187,6 @@
                 flex-direction: column;
                 width: 180px;
                 height: 86px;
-
-                .ant-radio, .ant-radio .ant-radio-inner {
-                    width: 24px;
-                    height: 24px;
-
-                }
-                .ant-radio.ant-radio-checked .ant-radio-inner::after {
-                    transform: scale(1.0);
-                }
                 
                 .ant-radio-wrapper {
                     display: flex;

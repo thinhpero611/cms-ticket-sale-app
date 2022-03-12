@@ -61,7 +61,7 @@ const AddComboTicket: React.FC<Iprops> = ({ setComboTicket, comboTicket }) => {
           <Option value={status.COMBO_ACTIVE}>Đang áp dụng</Option>
           <Option value={status.COMBO_OFF}>Tắt</Option>
           </Select>
-          <Text italic><sup style={{color: 'red'}}>*</sup>là thông tin bắt buột</Text>
+          <Text><span>*</span><i>là thông tin bắt buột</i></Text>
         </div>
       </div>
   )

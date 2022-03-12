@@ -1,29 +1,29 @@
 @import "../variable";
 @import "../mixin";
 @import "./manage.scss";
-// .main-component {
-// }
-$grey-4: #A5A8B1;
-// @include bold-24() {
-//     font-style: normal;
-//     font-weight: $font-weight-bold;
-//     font-size: $fs-3;
-//     line-height: 30px;
-//     display: flex;
-//     align-items: center;
-//     color: $color--main-text;
-// }
 
-// @include semibold-16() {
-//     font-style: normal;
-//     font-weight: $font-weight-semi-bold;
-//     font-size: $fs-1;
-//     line-height: 26px;
-//     display: flex;
-//     align-items: center;
-//     color: $color--main-text;;
-//     opacity: 0.7;
-// }
+$grey-4: #A5A8B1;
+$default-input-color: #1890ff;
+
+
+@mixin medium-16 {
+    /* 16 medium */
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+
+    /* Text */
+
+    color: #1E0D03;
+
+    opacity: 0.7;
+}
 
 .setting-component {
     background: $color__white;
@@ -64,7 +64,11 @@ $grey-4: #A5A8B1;
         height: 48px;
         z-index: 20;
         // cursor: pointer;
-        
+        &:hover {
+            outline: none;
+            box-shadow: none;
+        }
+
     }
 
     /* override css property */
@@ -79,7 +83,6 @@ $grey-4: #A5A8B1;
             opacity: 0.8;
         }
     }
-
 
     .card-main-table {
         position: absolute;
@@ -136,123 +139,3 @@ $grey-4: #A5A8B1;
     }
 }
 
-.ant-modal.my-modal-item .ant-modal-content {
-    width: 758px;
-    height: 628px;
-    border-radius: 24px;
-
-    .ant-modal-header, .ant-modal-footer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: $color__white;
-        border-radius: 24px;
-    }
-
-    button.ant-modal-close {
-        display: none;
-    }
-
-    .ant-modal-title {
-        // position: absolute;
-        // top: 24px;
-        // left: 302px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        @include bold-24();
-    }
-
-    .ant-modal-body {
-        position: absolute;
-        left: 32px;
-        top: 81px;
-        display: flex;
-        flex-direction: column;
-        padding: 0;
-        
-        div.combo-ticket__add-name, div.update-combo__name {
-            display: flex;
-            justify-content: center;
-
-            >div {
-                margin: 0 80px 0 0;
-            }
-            div span.ant-typography {
-                @include semibold-16();
-            }
-            div input.ant-input {
-                margin-bottom: 5px;
-                border: 1px solid #A5A8B1;
-                box-sizing: border-box;
-                border-radius: 8px;
-                @include semibold-16();
-                font-weight: $font-weight-medium;
-
-                &:focus {
-                    outline: none;
-                    box-shadow: none;
-                }
-            }
-        }
-    }
-
-    .ant-modal-footer {
-        position: absolute;
-        top: 548px;
-        padding: 0;
-        width: 100%;
-        button.ant-btn {
-            margin: 0 24px 0 0;
-        }
-
-        button.ant-btn:hover {
-            background: #FD5959;
-        }
-        
-        button.ant-btn:nth-child(2) {
-            background: $color__main;
-            span {
-                color: $color__white;
-            }
-
-            &:hover {
-                opacity: 0.7;
-            }
-        }
-
-    }
-}
-
-/* căn chỉnh lại vị trí của hộp add name */
-.ant-modal.modal-add-combo-ticket .ant-modal-content .ant-modal-body 
-.add-combo-ticket-card div.combo-ticket__add-name div {
-    margin: 0 254px 0 0;
-    input.ant-input {
-        width: 367px;
-        height: 40px;
-    }
-}
-
-/* chỉnh sửa hộp modal light box trong tính năng cập nhập gói vé */
-.ant-modal.modal-update-combo-ticket .ant-modal-content 
-.ant-modal-body .update-combo-ticket-card {
-
-    div.update-combo__name {
-        div:nth-child(1) {
-            input.ant-input {
-                width: 245px;
-                height: 40px;
-            }
-        }
-
-        div:nth-child(2) {
-            
-            input.ant-input {
-                width: 367px;
-                height: 40px;
-            }
-        }
-
-    } 
-} 

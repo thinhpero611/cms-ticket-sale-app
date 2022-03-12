@@ -18,15 +18,23 @@ const DateRangePicker = ( props: Iprops ) => {
           <div className="typography">
             <Text>Từ ngày</Text>
           </div>
-          <DatePickerComponent placeholder='dd/mm/yy' suffixIcon={<FiCalendar size="27" className="icon-feather" />} />
-          {props?.hasTimePicker && (<TimePickerComponent />) }
+          {props?.hasTimePicker ? (
+            <div>
+              <DatePickerComponent placeholder='dd/mm/yy' suffixIcon={<FiCalendar size="27" className="icon-feather" />} />
+              <TimePickerComponent />
+            </div>
+          ) :  <DatePickerComponent placeholder='dd/mm/yy' suffixIcon={<FiCalendar size="27" className="icon-feather" />} />}
         </div>
         <div className="end-day picker-item">
           <div className="typography">
             <Text>Đến ngày</Text>
           </div>
-          <DatePickerComponent placeholder='dd/mm/yy' suffixIcon={<FiCalendar size="27" className="icon-feather" />}/>
-          {props?.hasTimePicker && (<TimePickerComponent />) }
+          {props?.hasTimePicker ? (
+            <div>
+              <DatePickerComponent placeholder='dd/mm/yy' suffixIcon={<FiCalendar size="27" className="icon-feather" />} />
+              <TimePickerComponent />
+            </div>
+          ) :  <DatePickerComponent placeholder='dd/mm/yy' suffixIcon={<FiCalendar size="27" className="icon-feather" />} />}
         </div>
     </div>
   )

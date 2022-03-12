@@ -1,0 +1,309 @@
+@import "../variable";
+@import "../mixin";
+@import "../view/manage.scss";
+
+
+$grey-4: #A5A8B1;
+$default-input-color: #1890ff;
+
+.ant-modal.my-modal-item .ant-modal-content {
+    width: 758px;
+    height: 628px;
+    border-radius: 24px;
+
+    .ant-modal-header, .ant-modal-footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: $color__white;
+        border-radius: 24px;
+    }
+
+    button.ant-modal-close {
+        display: none;
+    }
+
+    .ant-modal-title {
+        // position: absolute;
+        // top: 24px;
+        // left: 302px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include bold-24();
+    }
+
+    .ant-modal-body {
+        position: absolute;
+        left: 32px;
+        top: 81px;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        width: 100%;
+        
+        div.combo-ticket__add-name, div.update-combo__name {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            > div {
+                position: absolute;
+                top: 0;
+                left: 0;
+                margin: 0 80px 0 0;
+            }
+
+            > div:nth-child(2) {
+                left: 327px;
+            }
+
+            div span.ant-typography {
+                @include semibold-16();
+            }
+            div input.ant-input {
+                margin-bottom: 5px;
+                border: 1px solid #A5A8B1;
+                box-sizing: border-box;
+                border-radius: 8px;
+                @include semibold-16();
+                font-weight: $font-weight-medium;
+
+                &:focus {
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+        }
+
+        div.combo-ticket__date-range-picker, div.update-combo__date-range-picker {
+            .range-picker-card {
+                display: flex;
+                justify-content: center;
+                position: absolute;
+                top: 81px;
+                left: 0;
+            }
+
+            div.picker-item {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                margin: 0 50px 0 0;
+            }
+
+            div.picker-item:nth-child(2) {
+                left: 327px;
+            }
+
+            div.picker-item span.ant-typography {
+                @include semibold-16();
+            }
+            div.picker-item div:nth-child(2) {
+                display: flex;
+                justify-content: center;
+
+                .ant-picker {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 141px;
+                    height: 40px;
+                    padding: 8px 12px;
+                    border-radius: 8px;
+                    border: 1px solid #A5A8B1;
+                    margin-right: 9px;
+                }
+            } 
+        }
+
+        div.combo-ticket__price, div.update-combo__price {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            position: absolute;
+            top: 191px;
+            left: 0px;
+
+            span.ant-typography {
+                @include semibold-16();
+                width: 100%;
+            }
+            .ant-checkbox-group {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                width: 100%;
+
+                .ant-checkbox-wrapper {
+                    width: 60%;
+
+                    > span:nth-child(2) {
+                        @include medium-16();
+                    }
+                }
+                
+                .input-number-wrapper {
+                    display: inline-block;
+                    margin-bottom: 10px;
+                    .ant-input-number {
+
+                        display: flex;
+                        flex-direction: row;
+                        align-items: flex-start;
+                        padding: 10px 12px;
+                        width: 148px;
+                        height: 40px;
+                        /* Grey / 2 */
+                        background: #F1F4F8;
+                        border-radius: 8px;
+                        /* Inside auto layout */
+                        flex: none;
+                        order: 2;
+                        flex-grow: 0;
+                        margin: 0px 8px;
+
+                        .ant-input-number-handler-wrap {
+                            border-radius: 0 8px 8px 0;
+                        }
+                        
+                        .ant-input-number-input-wrap {
+                            text-align: calc(8);
+                        }
+                        &:hover {
+                            border: #fff;
+                        }
+                    }
+                    &:nth-child(2) .ant-input-number {
+                        width: 72px;
+                    }
+                }
+            }
+
+            .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+                margin: 0;
+            }
+        }
+
+        div.combo-ticket__status, div.update-combo__status {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            position: absolute;
+            left: 0px;
+            top: 338px;
+
+            span.ant-typography {
+                @include semibold-16();
+                margin: 8px 0;
+            }
+
+            .ant-select .ant-select-selector {
+                width: 176px;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 8px 12px;
+                border: 1px solid #A5A8B1;
+                box-sizing: border-box;
+                border-radius: 8px;
+
+                @include medium-16();
+                
+                &:hover {
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+            
+            .ant-select .ant-select-arrow {
+                color: $color__main;
+            }
+
+            span.ant-typography  {
+                i {
+                    font-family: 'Montserrat';
+                    font-style: italic;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 15px;
+                    /* identical to box height */
+                    display: flex;
+                    align-items: center;
+                    /* Text */
+                    color: #1E0D03;
+                    opacity: 0.4;
+                }
+
+                span {
+                    @include semibold-16();
+                    color: #FD5959;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    .ant-modal-footer {
+        position: absolute;
+        top: 548px;
+        padding: 0;
+        width: 100%;
+        button.ant-btn {
+            margin: 0 24px 0 0;
+        }
+
+        button.ant-btn:hover {
+            background: #FD5959;
+        }
+        
+        button.ant-btn:nth-child(2) {
+            background: $color__main;
+            span {
+                color: $color__white;
+            }
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+
+    }
+}
+
+/* căn chỉnh lại vị trí của hộp add name */
+.ant-modal.modal-add-combo-ticket .ant-modal-content .ant-modal-body 
+.add-combo-ticket-card div.combo-ticket__add-name div {
+    margin: 0 254px 0 0;
+    input.ant-input {
+        width: 367px;
+        height: 40px;
+    }
+}
+
+/* chỉnh sửa hộp modal light box trong tính năng cập nhập gói vé */
+.ant-modal.modal-update-combo-ticket .ant-modal-content 
+.ant-modal-body .update-combo-ticket-card {
+
+    div.update-combo__name {
+        div:nth-child(1) {
+            input.ant-input {
+                width: 245px;
+                height: 40px;
+            }
+        }
+
+        div:nth-child(2) {
+            input.ant-input {
+                width: 367px;
+                height: 40px;
+            }
+        }
+
+    } 
+}

@@ -1,0 +1,13 @@
+
+.ant-radio-group {
+    .ant-radio, .ant-radio .ant-radio-inner {
+        border-width: 2px;
+        border-color: #1890ff;
+        width: 24px;
+        height: 24px;
+        
+    }
+    .ant-radio-checked .ant-radio-inner::after {
+        transform: scale(1.0);
+    }
+}

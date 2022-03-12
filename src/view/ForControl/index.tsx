@@ -14,7 +14,6 @@ import ExportFile from '../../shared/component/ExportFile'
 import EnableTicketButton from '../../shared/component/EnableTicketButton'
 import data2 from '../Magage/data2'
 import DashComponent from '../../shared/component/DashComponent'
-import { getAllComboTicketAsync } from '../../module/comboTicket/repository'
 import { getAllTicketAsync } from '../../module/ticket/repository'
 
 const { TabPane } = Tabs
@@ -26,7 +25,7 @@ const ForControl = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAllTicketAsync())
+    // dispatch(getAllTicketAsync())
   }, [dispatch])
 
   console.log(tickets.results)
@@ -92,7 +91,7 @@ const ForControl = () => {
           <TabPane key="1" tab="Gói gia đình">
             {/*@ts-ignore */}
             <TableComponent 
-              apiServices={api.ticket.filterTicketForControl}
+              // apiServices={api.ticket.filterTicketForControl}
               hasStt={true}
               columns={columns}
               dataSource={tickets.results}
@@ -105,7 +104,7 @@ const ForControl = () => {
           <TabPane key="2" tab="Gói sự kiện">
             {/*@ts-ignore */}
             <TableComponent 
-              apiServices={api.ticket.filterTicketForControl}
+              // apiServices={api.ticket.filterTicketForControl}
               hasStt={true}
               columns={column2s}
               dataSource={tickets.results.filter((item) => item.event !== null)}

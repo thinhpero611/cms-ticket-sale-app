@@ -100,6 +100,11 @@ $light-grey: #888888;
       height: 40px;
       left: 1325px;
       top: 0px;
+
+      background: #FFFFFF;
+      border: 1px solid #E6E0E0;
+      box-sizing: border-box;
+      border-radius: 4px;
     }
   }
 
@@ -154,6 +159,19 @@ $light-grey: #888888;
       height: 40px;
       left: 32px;
       top: 611px;
+
+      background: #FFFFFF;
+      border: 1px solid #E6E0E0;
+      box-sizing: border-box;
+      border-radius: 4px;
+
+    .ant-picker.date-has-picked {
+        background:  #fff;
+    }
+    
+    .ant-picker.date-has-picked .ant-picker-suffix svg {
+      stroke: $color__main !important;
+    }
     }
 
     .donut-chart {

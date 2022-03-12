@@ -49,9 +49,9 @@ const UpdateComboTicket = ({ currentId }) => {
       <div className="update-combo__price">
         <Text>Giá vé áp dụng</Text>
         <Checkbox.Group onChange={handleCheckboxChange}>
-        <Checkbox value={currentVal?.ticketPrice}>Vé lẻ (vnđ/vé) với giá <InputNumberComponent value={currentVal?.ticketPrice} handleChange={setNum1} placeholder='giá vé' /> / vé</Checkbox>
+        <Checkbox value={currentVal?.ticketPrice || ''}>Vé lẻ (vnđ/vé) với giá <InputNumberComponent value={currentVal?.ticketPrice} handleChange={setNum1} placeholder='giá vé' /> / vé</Checkbox>
         {/*@ts-ignore */}
-        <Checkbox value={currentVal?.comboPrice}>Combo vé với giá <InputNumberComponent value={currentVal?.comboPrice} handleChange={setNum2} placeholder='giá vé' /> / <InputNumberComponent value={currentVal?.comboPrice / currentVal?.ticketPrice} handleChange={setNum3} width="50px" placeholder='số vé' />vé</Checkbox>
+        <Checkbox value={currentVal?.comboPrice || ''}>Combo vé với giá <InputNumberComponent value={currentVal?.comboPrice} handleChange={setNum2} placeholder='giá vé' /> / <InputNumberComponent value={currentVal?.comboPrice / currentVal?.ticketPrice} handleChange={setNum3} width="50px" placeholder='số vé' />vé</Checkbox>
         </Checkbox.Group>
       </div>
       <div className="update-combo__status">
@@ -60,7 +60,7 @@ const UpdateComboTicket = ({ currentId }) => {
         <Option value={status.COMBO_ACTIVE}>{status.COMBO_ACTIVE}</Option>
         <Option value={status.COMBO_OFF}>{status.COMBO_OFF}</Option>
         </Select>
-        <Text italic><sup style={{color: 'red'}}>*</sup>là thông tin bắt buột</Text>
+        <Text><span>*</span><i>là thông tin bắt buột</i></Text>
       </div>
     </div>
   )

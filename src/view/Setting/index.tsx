@@ -114,7 +114,7 @@ const SettingComponent = () => {
         onCancel={() => setIsShowModalAddTicket(false)}
         onOk={() => setIsShowModalAddTicket(false)}
         footer={[
-          <Button onClick={() => setIsShowModalUpdateTicket(false)}>Hủy</Button>,
+          <Button onClick={() => setIsShowModalAddTicket(false)}>Hủy</Button>,
           <Button onClick={handleAddComboTicket}>Lưu</Button>
         ]}
       >
