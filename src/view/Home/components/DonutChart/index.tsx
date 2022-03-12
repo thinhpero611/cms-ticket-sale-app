@@ -26,17 +26,20 @@ const DonutChart = ({ data, width, height, color: colorIn }: IProps) => {
     legend: false,
     label: {
       type: 'inner',
-      offset: '90%',
+      offset: '100%',
       autoRotate: false,
       content: '{value}',
       style: {
+        fontFamily: 'Montserrat',
+        fontSize: 14,
+        fontWeight: 400,
+        lineHeight: 20,
         textAlign: 'center',
-        background: '#fff',
-        width: '66px',
-        height: '46px',
-        padding: '12px',
+        fill: '#1E0D03',
+        shadowOffsetX: '66px',
+        shadowOffsetY: '46px',
+        shadowColor: 'black',
         boxShadow: '0px 0px 50px rgba(50, 50, 71, 0.25)',
-        borderRadius: '12px'
       },
     },
     interactions: [

@@ -81,45 +81,5 @@
       margin: 16px 0px;
     }
   }
-  .ant-picker-calendar .ant-picker-panel .ant-picker-date-panel
-  .ant-picker-body .ant-picker-content{
-    tr {
-      margin: 16px 0px;
-      th {
-        /* 18 semibold */
-        font-family: Montserrat;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 18px;
-        line-height: 28px;
-        /* Yellow / 2 */
-        color: #C55E00;
-        /* Inside auto layout */
+
   
-        flex: none;
-        order: 0;
-        flex-grow: 0;
-        margin: 0px 23px;
-      }
-      // td {
-      //   font-style: normal;
-      //   font-weight: 500;
-      //   font-size: 16px;
-      //   line-height: 20px;
-      //   color: #23221F;
-      // }
-    }
-  } 
-  
-  .ant-picker-cell .ant-picker-cell-inner {
-    border-radius: 13px !important;
-  }
-  .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
-    border-color: #FFBA7B !important;
-    border-radius: 13px !important;
-  }
-  .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner, 
-  .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner, 
-  .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
-    background: #FFBA7B !important;
-  }

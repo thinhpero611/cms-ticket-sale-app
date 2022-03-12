@@ -7,29 +7,34 @@
     // .ant-picker-clear {
     //     display: none !important;
     // }
-}
-
-@media screen and (max-width: 1790px) {
-    .ant-picker-input{
-        input{
-            font-size: 15px;
-        }
-    }
-}
-@media screen and (max-width: 1650px) {
-    .ant-picker-input{
-        input{
-            font-size: 14px;
-        }
-    }
-}
-@media screen and (max-width: 1615px) {
-    .ant-picker-input{
-        input{
+    .ant-picker-input {
+        input {
             font-size: 13px;
         }
     }
 }
+
+// @media screen and (max-width: 1790px) {
+//     .ant-picker-input{
+//         input{
+//             font-size: 15px;
+//         }
+//     }
+// }
+// @media screen and (max-width: 1650px) {
+//     .ant-picker-input{
+//         input{
+//             font-size: 14px;
+//         }
+//     }
+// }
+// @media screen and (max-width: 1615px) {
+//     .ant-picker-input{
+//         input{
+//             font-size: 13px;
+//         }
+//     }
+// }
 
 /* background after picked */
 .ant-picker.date-has-picked {
@@ -38,4 +43,199 @@
 
 .ant-picker.date-has-picked .ant-picker-suffix svg {
     stroke: #A5A8B1;
+}
+
+
+.ant-picker-dropdown, .ant-picker-panel-container, .ant-picker-panel {
+    position: relative;
+    width: 370px;
+    height: 396px;
+    background: #FFFFFF;
+    /* tabs */
+
+    box-shadow: 4px 4px 45px rgba(109, 46, 0, 0.35);
+    border-radius: 20px !important;
+}
+
+.ant-picker-date-panel, .ant-picker-week-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+
+    .ant-picker-header {
+        position: absolute;
+        top: 30px;
+        left: 32px;
+        width: 100%;
+
+        .ant-picker-header-prev-btn {
+            position: absolute;
+            top: -16px;
+            left: 0;
+        }
+
+        .ant-picker-header-next-btn {
+            position: absolute;
+            left: 152px;
+            top: -16px;
+        }
+        
+        .ant-picker-prev-icon::before, .ant-picker-next-icon::before, .ant-picker-super-prev-icon::before, .ant-picker-super-next-icon::before {
+            border-width: 2.5px 0 0 2.5px;
+            color: #1E0D03;
+        }
+
+        .ant-picker-header-view {
+            position: absolute;
+            left: 27.31px;
+            top: -13px;
+
+            button {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 26px;
+                color:  #23221F;
+            }
+        }
+
+    }
+
+    .ant-picker-body {
+        position: absolute;
+        left: 32px;
+        top: 106px;
+        width: 320px;
+        height: 226px;
+        padding: 0;
+        /* style table head */
+        .ant-picker-content {
+            width: 315px;
+            height: 265px;
+            tr th {
+                /* 18 semibold */
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 28px;
+                /* Yellow / 2 */
+                color: #C55E00;
+                /* Inside auto layout */
+        
+                flex: none;
+                order: 0;
+                flex-grow: 0;
+                margin: 0px 23px;
+            }
+        }
+    }
+
+}
+
+.ant-picker-footer {
+    position: absolute;
+    top: 68px;
+    left: 32px;
+
+    .ant-radio-group {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        .ant-radio-wrapper:first-child {
+            margin-right: 91px;
+        }
+        .ant-radio-wrapper span:nth-child(2) {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            letter-spacing: 0.015em;
+            color: #1E0D03;
+        }
+    }
+
+    .ant-picker-today-btn {
+        display: none;
+    }
+}
+
+/* remove border*/
+.ant-picker-panel .ant-picker-footer, .ant-picker-header, .ant-picker-footer-extra:not(:last-child) {
+    border: #fff;
+}
+
+.ant-picker-date-panel .ant-picker-body {
+    .ant-picker-content tr :not(.ant-picker-cell-in-view.ant-picker-cell-selected) {
+        // display: block;
+        margin: 8px 0;
+    }
+    .ant-picker-content tr .ant-picker-cell-in-view.ant-picker-cell-selected {
+        display: block;
+        margin: 8px 0;
+    }
+
+    .ant-picker-cell .ant-picker-cell-inner {
+        border-radius: 13px !important;
+      }
+      .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+        border-color: #FFBA7B !important;
+        border-radius: 13px !important;
+      }
+      .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner, 
+      .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner, 
+      .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+        background: #FFBA7B !important;
+      }
+}
+
+.ant-picker-week-panel {
+    /* in-active off current value */
+    .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+        border: #fff;
+    }
+    /* remove border in ant-picker-cell-inner */
+    .ant-picker-week-panel-row-selected td.ant-picker-cell-today .ant-picker-cell-inner::before, .ant-picker-week-panel-row-selected:hover td.ant-picker-cell-today .ant-picker-cell-inner::before {
+        border-color: #FFD2A8;
+    }
+}
+
+/* margin in selected row  */
+.ant-picker-week-panel-row-selected {
+    display: block;
+    width: 320px;
+    background: #FFD2A8;
+    border-radius: 20px;
+    margin: 8px 0;
+    td {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* set background active all cell-data inner in one row  */
+.ant-picker-week-panel-row-selected td, .ant-picker-week-panel-row-selected:hover td {
+    background: #FFD2A8;
+}
+
+/* customize first cel one row*/
+.ant-picker-week-panel-row-selected td:first-child , .ant-picker-week-panel-row-selected:hover td:first-child {
+    background: #FFBA7B;
+    border-radius: 50%;
+}
+
+/* customize last cell in one row*/
+.ant-picker-week-panel-row-selected td:last-child , .ant-picker-week-panel-row-selected:hover td:last-child {
+    background: #FFBA7B;
+    border-radius: 50%;
 }

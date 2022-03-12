@@ -165,13 +165,6 @@ $light-grey: #888888;
       box-sizing: border-box;
       border-radius: 4px;
 
-    .ant-picker.date-has-picked {
-        background:  #fff;
-    }
-    
-    .ant-picker.date-has-picked .ant-picker-suffix svg {
-      stroke: $color__main !important;
-    }
     }
 
     .donut-chart {
@@ -288,4 +281,12 @@ $light-grey: #888888;
       }
     }
   }
+}
+
+.ant-picker.date-has-picked {
+  background:  #fff;
+}
+
+.calendar.ant-picker.date-has-picked .ant-picker-suffix svg {
+  stroke: #ff7506 !important;
 }

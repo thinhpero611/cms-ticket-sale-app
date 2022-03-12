@@ -64,7 +64,7 @@ const Home = () => {
         <div className="label">
           <h2>Doanh thu</h2>
         </div>
-        <DatePickerComponent className="calendar" defaultValue={moment('22-02-2022', 'dd-mm-yyyy')} format="MMMM, YYYY"/>
+        <DatePickerComponent className="calendar" defaultValue={moment({})} format="MMMM, YYYY" renderExtraFooter={() => <h1>thinh</h1>}/>
         <Area {...config} />
        </div>
       <div className="revenue"> 
@@ -72,7 +72,7 @@ const Home = () => {
         <h1>525.142.000 </h1><span className="currency">đồng</span>
       </div>
       <div className="chart2">
-        <DatePickerComponent className="calendar" defaultValue={moment('22-02-2022', 'dd-mm-yyyy')} format="MMMM, YYYY"/>
+        <DatePickerComponent className="calendar" defaultValue={moment({})} format="MMMM, YYYY"/>
         <div className="donut-chart">
           <h2>Gói Gia đình</h2>
           <DonutChart data={data1} color={COLORS} />
