@@ -397,6 +397,7 @@
 
             .ant-checkbox-wrapper {
                 @include medium-16();
+                margin-bottom: 10px;
             }
             .ant-checkbox-group {
                 display: flex;

@@ -198,7 +198,30 @@
         }
 
         .filter__event {
+            position: absolute;
+            top: 386px;
+            left: 24px;
+            width: 70%;
 
+            .ant-select {
+                .ant-select-selector {
+                    width: 360px;
+                    height: 40px;
+                    background: #F1F4F8;
+                    border-radius: 8px;
+                    font-family: 'Montserrat';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 20px;
+                    /* identical to box height */
+
+                    display: flex;
+                    align-items: center;
+
+                    color: #7C7D95;
+                }
+            }
         }
 
         .filter__type-ticket {
@@ -298,7 +321,7 @@
             width: 160px;
             height: 48px;
             position: absolute;
-            top: 386px;
+            top: 468px;
             left: 136px;
 
             @include semibold-16();

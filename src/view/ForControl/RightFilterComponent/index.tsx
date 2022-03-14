@@ -37,7 +37,7 @@ const RightFilterComponent = ( props: Iprops ) => {
       <MainTitle index={2} title="Lọc vé" />
       {props.isEventTicket && (
         <div className="filter__event">
-          <Select onChange={hanldeOnChangeSelect}>
+          <Select defaultValue="Will AI invade human civilization" onChange={hanldeOnChangeSelect}>
             <Option value="Will AI invade human civilization">Will AI invade human civilization</Option>
           </Select>
         </div>

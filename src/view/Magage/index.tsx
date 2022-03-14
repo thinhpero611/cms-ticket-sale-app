@@ -31,7 +31,7 @@ const ManageTicket = () => {
   const dispatch = useDispatch()
   
   useEffect(() => {
-    // dispatch(getAllTicketAsync())
+    dispatch(getAllTicketAsync())
   }, [dispatch])
 
   const handleTabOnChange = (key: string) => {
@@ -49,10 +49,7 @@ const ManageTicket = () => {
       title: 'Số vé',
       dataIndex: 'ticketNumber',
       key: 'ticketNumber',
-      render: (record) => {
-        if (record) return record
-        return <DashComponent />
-      }
+      render: (record) => record ? record : <DashComponent />
     },
     {
       title: 'Tình trạng sử dụng',
@@ -76,28 +73,19 @@ const ManageTicket = () => {
       title: 'Ngày sử dụng',
       dataIndex: 'useDate',
       key: 'useDate',
-      render: (record) => {
-        if (record) return record
-        return <DashComponent />
-      }
+      render: (record) => record ? record : <DashComponent />
     },
     {
       title: 'Ngày xuất vé',
       dataIndex: 'outDate',
       key: 'outDate',
-      render: (record) => {
-        if (record) return record
-        return <DashComponent />
-      }
+      render: (record) => record ? record : <DashComponent />
     },
     {
       title: 'Cổng check-in',
       dataIndex: 'gate',
       key: 'gate',
-      render: (record) => {
-        if (record) return record
-        return <DashComponent />
-      }
+      render: (record) => record ? record : <DashComponent />
     }, 
     {
       title: '',
@@ -112,7 +100,7 @@ const ManageTicket = () => {
 
   // for event packs
   const column2s = [...columns]
-  column2s.splice(2, 0, { title: 'Tên sự kiện', dataIndex: 'event', key: 'event'})
+  column2s.splice(2, 0, { title: 'Tên sự kiện', dataIndex: 'event', key: 'event',  render: (record) => record ? record : <DashComponent />})
 
   const handleShowChangeDateModal = () => {
     setIsShowModal(true)
@@ -124,7 +112,7 @@ const ManageTicket = () => {
       <Tabs defaultActiveKey="1" onChange={handleTabOnChange} className="main-tab">
         <TabPane tab="Gói gia đình" key="1" className="family-packs">
           <TableComponent 
-            // apiServices={api.ticket.filterTicket}
+            apiServices={api.ticket.filterTicket}
             hasStt={true} 
             pagination={{ total: ticket.results.length, pageSize: 9 }}
             dataSource={ ticket.results} 
@@ -137,10 +125,10 @@ const ManageTicket = () => {
         </TabPane>
         <TabPane tab="Gói sự kiện" key="2" className="event-packs">
           <TableComponent 
-            // apiServices={api.ticket.filterTicket}
+            apiServices={api.ticket.filterTicket}
             hasStt={true} 
             pagination={{ total: ticket.results.filter((item) => item.event != '').length, pageSize: 9}}
-            dataSource={data.filter((item) => item.event != '')} 
+            dataSource={ticket.results.filter((item) => item.event != '')} 
             columns={column2s} 
             search={{ placeholder: 'Tìm bằng số vé'}}
             filterButton={{ title: 'Lọc'}}
